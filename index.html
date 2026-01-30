@@ -3,618 +3,682 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Slovenia Student Arrival Checklist (Maribor)</title>
+  <title>Slovenia Student Arrival – 3 Day Checklist</title>
 
   <style>
     :root{
-      --bg:#0b1220;
-      --panel:#101a2c;
+      --bg:#070b14;
+      --card:#0f172a;
+      --card2:#0b1324;
       --text:#eaf2ff;
       --muted:#9fb0cf;
-      --border:rgba(255,255,255,0.09);
+      --border:rgba(255,255,255,0.10);
       --accent:#4da3ff;
       --accent2:#22c55e;
-      --danger:#ff5a6a;
       --warn:#ffcc66;
+      --shadow: 0 16px 60px rgba(0,0,0,0.45);
     }
 
-    *{ box-sizing:border-box; }
+    *{box-sizing:border-box}
     body{
       margin:0;
       font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
-      color: var(--text);
+      color:var(--text);
       background:
-        radial-gradient(900px 500px at 12% 0%, rgba(77,163,255,0.25), transparent 60%),
-        radial-gradient(800px 450px at 80% 10%, rgba(34,197,94,0.20), transparent 55%),
+        radial-gradient(900px 500px at 12% 0%, rgba(77,163,255,0.22), transparent 60%),
+        radial-gradient(900px 500px at 88% 10%, rgba(34,197,94,0.16), transparent 60%),
         var(--bg);
     }
 
-    .wrap{
-      max-width: 1180px;
-      margin: 0 auto;
-      padding: 24px 14px 60px;
-    }
-
+    .wrap{max-width:1200px; margin:0 auto; padding:26px 14px 60px;}
     header{
-      display:flex;
-      justify-content:space-between;
-      align-items:flex-start;
-      gap:14px;
-      flex-wrap:wrap;
+      display:flex; justify-content:space-between; align-items:flex-start;
+      gap:14px; flex-wrap:wrap;
       padding:18px;
-      background: rgba(16,26,44,0.80);
+      background:rgba(15,23,42,0.82);
       border:1px solid var(--border);
       border-radius:18px;
+      box-shadow: var(--shadow);
       backdrop-filter: blur(10px);
     }
-
-    .brand h1{
-      margin:0;
-      font-size: 20px;
-      letter-spacing: 0.2px;
-    }
-    .brand p{
-      margin:6px 0 0;
-      color: var(--muted);
-      font-size: 13px;
-      line-height:1.45;
-      max-width: 840px;
-    }
-    .created{
-      margin-top: 6px;
-      color: var(--muted);
-      font-size: 12px;
-    }
-
-    .actions{
-      display:flex;
-      gap:10px;
-      flex-wrap:wrap;
-      align-items:center;
-    }
-
+    .brand h1{margin:0; font-size:20px;}
+    .brand p{margin:6px 0 0; color:var(--muted); font-size:13px; line-height:1.45; max-width:820px;}
+    .brand .by{margin-top:6px; color:var(--muted); font-size:12px;}
+    .actions{display:flex; gap:10px; flex-wrap:wrap;}
     .btn{
       cursor:pointer;
-      border:1px solid var(--border);
-      background: rgba(255,255,255,0.05);
-      color: var(--text);
       padding:10px 12px;
       border-radius:12px;
-      font-size: 13px;
-      transition: transform .08s ease, background .15s ease;
-      user-select:none;
+      border:1px solid var(--border);
+      background:rgba(255,255,255,0.05);
+      color:var(--text);
+      font-size:13px;
+      transition:.15s ease;
     }
-    .btn:hover{
-      transform: translateY(-1px);
-      background: rgba(77,163,255,0.12);
-      border-color: rgba(77,163,255,0.25);
-    }
-    .btn.primary{
-      background: rgba(77,163,255,0.16);
-      border-color: rgba(77,163,255,0.32);
-    }
-    .btn.danger{
-      background: rgba(255,90,106,0.12);
-      border-color: rgba(255,90,106,0.3);
-    }
+    .btn:hover{transform:translateY(-1px); background:rgba(77,163,255,0.12); border-color:rgba(77,163,255,0.25);}
+    .btn.primary{background:rgba(77,163,255,0.16); border-color:rgba(77,163,255,0.35);}
 
-    .grid{
-      display:grid;
-      grid-template-columns: 1.2fr 0.8fr;
-      gap: 14px;
-      margin-top: 14px;
-    }
-    @media(max-width: 980px){
-      .grid{ grid-template-columns: 1fr; }
-    }
+    .grid{display:grid; grid-template-columns: 1.25fr 0.75fr; gap:14px; margin-top:14px;}
+    @media(max-width: 980px){ .grid{grid-template-columns:1fr;} }
 
     .card{
-      padding: 16px;
-      border-radius: 18px;
-      border: 1px solid var(--border);
-      background: rgba(16,26,44,0.85);
-    }
-
-    .card h2{
-      margin:0 0 10px;
-      font-size: 15px;
-    }
-    .muted{
-      color: var(--muted);
-      font-size: 13px;
-      line-height:1.5;
-    }
-
-    .day{
-      margin-top: 12px;
-      padding: 14px;
-      border-radius: 16px;
+      background:rgba(15,23,42,0.86);
       border:1px solid var(--border);
-      background: rgba(255,255,255,0.03);
+      border-radius:18px;
+      padding:16px;
+      box-shadow: var(--shadow);
     }
+    .card h2{margin:0 0 10px; font-size:15px;}
+    .muted{color:var(--muted); font-size:13px; line-height:1.5;}
 
-    .dayHead{
-      display:flex;
-      justify-content:space-between;
-      align-items:flex-start;
-      gap:10px;
-      flex-wrap:wrap;
-      margin-bottom: 10px;
-    }
-    .dayHead b{
-      font-size: 14px;
-    }
-
-    .tag{
-      font-size: 12px;
-      padding: 6px 10px;
-      border-radius: 999px;
-      border:1px solid var(--border);
-      background: rgba(255,255,255,0.04);
-      color: var(--muted);
-    }
-    .tag.good{ color: var(--accent2); border-color: rgba(34,197,94,0.35); }
-    .tag.warn{ color: var(--warn); border-color: rgba(255,204,102,0.35); }
-
-    .task{
-      display:flex;
-      gap:10px;
-      align-items:flex-start;
-      padding: 10px;
-      border-radius: 14px;
-      border:1px solid var(--border);
-      background: rgba(255,255,255,0.03);
-      margin-top: 10px;
-    }
-    .task input[type="checkbox"]{
-      width:18px;height:18px;
-      margin-top: 2px;
-      accent-color: var(--accent);
-    }
-    .task b{
-      font-size: 14px;
-      display:block;
-    }
-    .task span{
-      display:block;
-      color: var(--muted);
-      font-size: 12.5px;
-      line-height:1.35;
-      margin-top:2px;
-    }
-
-    .note{
-      margin-top: 10px;
-      padding: 10px 12px;
-      border-radius: 14px;
-      border:1px dashed rgba(255,255,255,0.18);
-      background: rgba(255,255,255,0.03);
-      color: var(--muted);
-      font-size: 12.5px;
-      line-height: 1.45;
-    }
-
-    .settings{
-      display:grid;
-      gap:12px;
-      margin-top: 10px;
-    }
-    .field{
-      display:grid;
-      gap:6px;
-    }
-    .field label{
-      font-size: 12.5px;
-      color: var(--muted);
-    }
+    .field{display:grid; gap:6px; margin-top:10px;}
+    .field label{font-size:12.5px; color:var(--muted);}
     .field input, .field select{
       width:100%;
-      padding: 11px 12px;
-      border-radius: 12px;
-      background: rgba(255,255,255,0.04);
+      padding:11px 12px;
+      border-radius:12px;
       border:1px solid var(--border);
-      color: var(--text);
+      background:rgba(255,255,255,0.04);
+      color:var(--text);
       outline:none;
-      font-size: 14px;
+      font-size:14px;
     }
-
     .field input:focus, .field select:focus{
-      border-color: rgba(77,163,255,0.4);
-      box-shadow: 0 0 0 4px rgba(77,163,255,0.08);
+      border-color:rgba(77,163,255,0.45);
+      box-shadow:0 0 0 4px rgba(77,163,255,0.08);
     }
 
-    .two{
-      display:grid;
-      grid-template-columns: 1fr 1fr;
-      gap:12px;
-    }
-    @media(max-width: 520px){
-      .two{ grid-template-columns: 1fr; }
-    }
+    .two{display:grid; grid-template-columns: 1fr 1fr; gap:12px;}
+    @media(max-width:520px){ .two{grid-template-columns:1fr;} }
 
-    .routes{
-      display:grid;
-      gap:10px;
-      margin-top: 10px;
+    .day{
+      margin-top:14px;
+      padding:14px;
+      border:1px solid var(--border);
+      border-radius:18px;
+      background:rgba(255,255,255,0.03);
     }
-    .routeBtn{
+    .dayTop{
+      display:flex; justify-content:space-between; align-items:flex-start;
+      gap:10px; flex-wrap:wrap;
+      margin-bottom:10px;
+    }
+    .dayTitle{font-size:14px; font-weight:700;}
+    .tag{
+      font-size:12px;
+      padding:6px 10px;
+      border-radius:999px;
+      border:1px solid var(--border);
+      background:rgba(255,255,255,0.04);
+      color:var(--muted);
+    }
+    .tag.warn{color:var(--warn); border-color:rgba(255,204,102,0.35);}
+    .tag.good{color:var(--accent2); border-color:rgba(34,197,94,0.35);}
+
+    .step{
+      margin-top:10px;
+      border-radius:16px;
+      border:1px solid var(--border);
+      background:rgba(11,19,36,0.55);
+      padding:12px;
+    }
+    .stepHead{
       display:flex;
       justify-content:space-between;
       gap:10px;
-      align-items:center;
-      border:1px solid var(--border);
-      background: rgba(255,255,255,0.04);
-      border-radius: 14px;
-      padding: 10px 12px;
-      text-decoration:none;
-      color: var(--text);
-      transition: transform .08s ease, background .15s ease;
+      flex-wrap:wrap;
+      align-items:flex-start;
     }
-    .routeBtn:hover{
-      transform: translateY(-1px);
-      background: rgba(77,163,255,0.10);
-      border-color: rgba(77,163,255,0.22);
+    .stepLeft{
+      display:flex;
+      gap:10px;
+      align-items:flex-start;
+      min-width: 240px;
     }
-    .routeBtn small{
-      color: var(--muted);
-      display:block;
-      margin-top: 2px;
-      font-size: 12px;
-      line-height: 1.2;
+    .check{
+      width:18px;height:18px;
+      margin-top:3px;
+      accent-color: var(--accent);
+    }
+    .stepName{
+      font-weight:700;
+      font-size:14px;
+      margin:0;
+    }
+    .stepSub{
+      margin:3px 0 0;
+      color:var(--muted);
+      font-size:12.7px;
+      line-height:1.35;
     }
 
-    footer{
-      margin-top: 14px;
-      text-align:center;
-      color: var(--muted);
-      font-size: 12px;
-      opacity: 0.9;
+    .chipRow{
+      display:flex; gap:8px; flex-wrap:wrap;
+      margin-top:10px;
     }
+    .chip{
+      font-size:12px;
+      padding:7px 9px;
+      border-radius:999px;
+      border:1px solid var(--border);
+      background:rgba(255,255,255,0.04);
+      color:var(--muted);
+      user-select:none;
+    }
+
+    .docs{
+      margin-top:10px;
+      padding:10px;
+      border-radius:14px;
+      border:1px dashed rgba(255,255,255,0.18);
+      background:rgba(255,255,255,0.03);
+    }
+    .docs b{display:block; font-size:12.5px; margin-bottom:6px;}
+    .docs ul{margin:0; padding-left:18px;}
+    .docs li{margin:4px 0; color:var(--muted); font-size:12.5px; line-height:1.35;}
+
+    .mapBtn{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      gap:8px;
+      text-decoration:none;
+      padding:10px 12px;
+      border-radius:12px;
+      border:1px solid rgba(77,163,255,0.28);
+      background:rgba(77,163,255,0.12);
+      color:var(--text);
+      font-size:13px;
+      transition:.15s ease;
+      white-space:nowrap;
+    }
+    .mapBtn:hover{transform:translateY(-1px); background:rgba(77,163,255,0.18);}
+
+    .routesBox{display:grid; gap:10px; margin-top:10px;}
+    .routeCard{
+      border:1px solid var(--border);
+      background:rgba(255,255,255,0.03);
+      border-radius:16px;
+      padding:12px;
+    }
+    .routeCard b{display:block; font-size:13px;}
+    .routeCard small{display:block; margin-top:4px; color:var(--muted); font-size:12px; line-height:1.25;}
+    footer{margin-top:14px; text-align:center; color:var(--muted); font-size:12px;}
   </style>
 </head>
 
 <body>
   <div class="wrap">
-
     <header>
       <div class="brand">
-        <h1>🇸🇮 Slovenia Student Arrival Checklist</h1>
+        <h1>🇸🇮 Slovenia Student Arrival Checklist (3 Days)</h1>
         <p>
-          A professional 3-day plan for international students (Maribor preset).  
-          Anyone can use this website: enter your starting address and open routes in Google Maps.
+          Day-wise steps with locations, required documents, and Google Maps buttons.
+          Works for Maribor preset — or any student can edit places and use it.
         </p>
-        <div class="created">Created by <b>Justin Johnson</b></div>
+        <div class="by">Created by <b>Justin Johnson</b></div>
       </div>
 
       <div class="actions">
         <button class="btn primary" onclick="window.print()">🖨️ Print</button>
         <button class="btn" onclick="copyShareLink()">🔗 Copy Share Link</button>
-        <button class="btn danger" onclick="resetAll()">♻️ Reset</button>
+        <button class="btn" onclick="resetAll()">♻️ Reset</button>
       </div>
     </header>
 
     <div class="grid">
 
-      <!-- LEFT -->
+      <!-- LEFT: DAY WISE -->
       <section class="card">
-
-        <h2>✅ Important Documents (Carry Originals + Copies)</h2>
-        <p class="muted">Keep these ready before visiting offices.</p>
-
-        <div class="task"><input type="checkbox" id="d1"><div><b>Passport (Original)</b><span>Must carry every time you go to official offices.</span></div></div>
-        <div class="task"><input type="checkbox" id="d2"><div><b>Visa + Entry Stamp</b><span>Take a copy of the visa page and entry stamp page.</span></div></div>
-        <div class="task"><input type="checkbox" id="d3"><div><b>Rent Agreement / Accommodation Proof</b><span>Needed for address registration and residence permit.</span></div></div>
-        <div class="task"><input type="checkbox" id="d4"><div><b>Enrollment Certificate (Potrdilo o vpisu)</b><span>You will get it from the university after enrollment.</span></div></div>
-        <div class="task"><input type="checkbox" id="d5"><div><b>Health Insurance Proof</b><span>Required for residence permit approval.</span></div></div>
-        <div class="task"><input type="checkbox" id="d6"><div><b>Proof of Funds</b><span>Bank statement / scholarship / sponsor proof (as required).</span></div></div>
-
-        <div class="note">
-          ✅ Tip: Make at least <b>2 photocopies</b> of each document and keep phone scans.
-        </div>
-
-        <h2 style="margin-top:14px;">✅ 3-Day Plan (Easy & Realistic)</h2>
+        <h2>✅ 3-Day Plan (Classy View)</h2>
+        <p class="muted">Each step includes the exact place, required documents, and a Google Maps route button.</p>
 
         <!-- DAY 1 -->
         <div class="day">
-          <div class="dayHead">
+          <div class="dayTop">
             <div>
-              <b>DAY 1 — Setup & Registration</b>
-              <div class="muted">Address registration + University documents</div>
+              <div class="dayTitle">DAY 1 — Setup & Registration</div>
+              <div class="muted">Complete address registration + university confirmation</div>
             </div>
             <span class="tag warn">Most urgent</span>
           </div>
 
-          <div class="task"><input type="checkbox" id="t1"><div><b>Register Temporary Address</b><span>Upravna Enota (Foreigners office). Bring passport + visa + rent agreement.</span></div></div>
-          <div class="task"><input type="checkbox" id="t2"><div><b>University Enrollment / Student Confirmation</b><span>University International Office. Request enrollment certificate.</span></div></div>
-          <div class="task"><input type="checkbox" id="t8"><div><b>Buy / Recharge Bus Card (Optional)</b><span>Useful for daily travel. Add your Bus Card location on the right to get routes.</span></div></div>
-          <div class="task"><input type="checkbox" id="t9"><div><b>Train Discount / Travel Option (Optional)</b><span>Check student discounts if you travel between cities.</span></div></div>
+          <!-- Step 1 -->
+          <div class="step">
+            <div class="stepHead">
+              <div class="stepLeft">
+                <input class="check" type="checkbox" id="s1"/>
+                <div>
+                  <p class="stepName">Step 1: Register Temporary Address</p>
+                  <p class="stepSub"><b>Location:</b> <span id="locUELabel"></span></p>
+                </div>
+              </div>
+              <a class="mapBtn" id="btnUE" target="_blank" rel="noopener">📍 Open in Maps</a>
+            </div>
+
+            <div class="docs">
+              <b>Documents Needed</b>
+              <ul>
+                <li>Passport (original)</li>
+                <li>Visa + entry stamp</li>
+                <li>Rent agreement / accommodation proof</li>
+              </ul>
+            </div>
+
+            <div class="chipRow">
+              <span class="chip">✅ Output: Address registration confirmation</span>
+              <span class="chip">⏱ Best time: morning</span>
+            </div>
+          </div>
+
+          <!-- Step 2 -->
+          <div class="step">
+            <div class="stepHead">
+              <div class="stepLeft">
+                <input class="check" type="checkbox" id="s2"/>
+                <div>
+                  <p class="stepName">Step 2: University Enrollment / Student Confirmation</p>
+                  <p class="stepSub"><b>Location:</b> <span id="locUNILabel"></span></p>
+                </div>
+              </div>
+              <a class="mapBtn" id="btnUNI" target="_blank" rel="noopener">🎓 Open in Maps</a>
+            </div>
+
+            <div class="docs">
+              <b>Documents Needed</b>
+              <ul>
+                <li>Passport (original)</li>
+                <li>Admission letter / offer letter</li>
+              </ul>
+            </div>
+
+            <div class="chipRow">
+              <span class="chip">✅ Output: Enrollment certificate (Potrdilo o vpisu)</span>
+            </div>
+          </div>
+
+          <!-- Step 3 -->
+          <div class="step">
+            <div class="stepHead">
+              <div class="stepLeft">
+                <input class="check" type="checkbox" id="s3"/>
+                <div>
+                  <p class="stepName">Step 3 (Optional): Buy / Recharge Bus Card</p>
+                  <p class="stepSub"><b>Location:</b> <span id="locBUSLabel"></span></p>
+                </div>
+              </div>
+              <a class="mapBtn" id="btnBUS" target="_blank" rel="noopener">🚌 Open in Maps</a>
+            </div>
+
+            <div class="docs">
+              <b>Documents Needed</b>
+              <ul>
+                <li>Passport / student ID (if asked)</li>
+                <li>Cash / card payment</li>
+              </ul>
+            </div>
+
+            <div class="chipRow">
+              <span class="chip">⭐ Optional but very useful</span>
+            </div>
+          </div>
+
+          <!-- Step 4 -->
+          <div class="step">
+            <div class="stepHead">
+              <div class="stepLeft">
+                <input class="check" type="checkbox" id="s4"/>
+                <div>
+                  <p class="stepName">Step 4 (Optional): Train Discount / Travel Info</p>
+                  <p class="stepSub"><b>Location:</b> Any train station / ticket office</p>
+                </div>
+              </div>
+              <a class="mapBtn" id="btnTrain" target="_blank" rel="noopener">🚆 Search Nearby</a>
+            </div>
+
+            <div class="docs">
+              <b>Documents Needed</b>
+              <ul>
+                <li>Passport (original)</li>
+                <li>Student confirmation / enrollment certificate (if needed)</li>
+              </ul>
+            </div>
+          </div>
+
         </div>
 
         <!-- DAY 2 -->
         <div class="day">
-          <div class="dayHead">
+          <div class="dayTop">
             <div>
-              <b>DAY 2 — Residence Permit</b>
-              <div class="muted">Biometrics + permit submission</div>
+              <div class="dayTitle">DAY 2 — Residence Permit (Biometrics)</div>
+              <div class="muted">Submit residence permit + fingerprints/photo</div>
             </div>
             <span class="tag good">Main step</span>
           </div>
 
-          <div class="task"><input type="checkbox" id="t3"><div><b>Submit Residence Permit + Biometrics</b><span>Return to Upravna Enota with address paper + enrollment certificate + insurance + proof of funds.</span></div></div>
+          <div class="step">
+            <div class="stepHead">
+              <div class="stepLeft">
+                <input class="check" type="checkbox" id="s5"/>
+                <div>
+                  <p class="stepName">Step 5: Submit Residence Permit + Biometrics</p>
+                  <p class="stepSub"><b>Location:</b> <span id="locUELabel2"></span></p>
+                </div>
+              </div>
+              <a class="mapBtn" id="btnPermit" target="_blank" rel="noopener">🪪 Open in Maps</a>
+            </div>
+
+            <div class="docs">
+              <b>Documents Needed</b>
+              <ul>
+                <li>Passport + Visa</li>
+                <li>Address registration confirmation (Day 1)</li>
+                <li>Enrollment certificate (Potrdilo o vpisu)</li>
+                <li>Health insurance proof</li>
+                <li>Proof of funds</li>
+              </ul>
+            </div>
+
+            <div class="chipRow">
+              <span class="chip">✅ Output: Confirmation paper (legal stay proof)</span>
+              <span class="chip">⏳ Card ready: 2–4 weeks (usually)</span>
+            </div>
+          </div>
         </div>
 
         <!-- DAY 3 -->
         <div class="day">
-          <div class="dayHead">
+          <div class="dayTop">
             <div>
-              <b>DAY 3 — Support Steps</b>
-              <div class="muted">Tax number + insurance + work registration</div>
+              <div class="dayTitle">DAY 3 — Tax, Insurance & Student Services</div>
+              <div class="muted">Finish support steps for work, bank, and daily life</div>
             </div>
-            <span class="tag">Support steps</span>
+            <span class="tag">Support</span>
           </div>
 
-          <div class="task"><input type="checkbox" id="t4"><div><b>Apply for Tax Number (Davčna številka)</b><span>FURS office. Needed for jobs + salary + bank account.</span></div></div>
-          <div class="task"><input type="checkbox" id="t5"><div><b>Health Insurance (If pending)</b><span>ZZZS office. Take passport + address registration.</span></div></div>
-          <div class="task"><input type="checkbox" id="t6"><div><b>Open Bank Account (Optional)</b><span>Choose any bank. Take passport + tax number.</span></div></div>
-          <div class="task"><input type="checkbox" id="t7"><div><b>Register in Študentski servis (Student Work Service)</b><span>After you get tax number + student confirmation, register for student work.</span></div></div>
-        </div>
+          <!-- Tax -->
+          <div class="step">
+            <div class="stepHead">
+              <div class="stepLeft">
+                <input class="check" type="checkbox" id="s6"/>
+                <div>
+                  <p class="stepName">Step 6: Apply for Tax Number (Davčna številka)</p>
+                  <p class="stepSub"><b>Location:</b> <span id="locFURSLabel"></span></p>
+                </div>
+              </div>
+              <a class="mapBtn" id="btnFURS" target="_blank" rel="noopener">🧾 Open in Maps</a>
+            </div>
 
+            <div class="docs">
+              <b>Documents Needed</b>
+              <ul>
+                <li>Passport (original)</li>
+                <li>Address registration paper</li>
+              </ul>
+            </div>
+          </div>
+
+          <!-- Insurance -->
+          <div class="step">
+            <div class="stepHead">
+              <div class="stepLeft">
+                <input class="check" type="checkbox" id="s7"/>
+                <div>
+                  <p class="stepName">Step 7: Health Insurance (If pending)</p>
+                  <p class="stepSub"><b>Location:</b> <span id="locZZZSLabel"></span></p>
+                </div>
+              </div>
+              <a class="mapBtn" id="btnZZZS" target="_blank" rel="noopener">🏥 Open in Maps</a>
+            </div>
+
+            <div class="docs">
+              <b>Documents Needed</b>
+              <ul>
+                <li>Passport (original)</li>
+                <li>Address registration paper</li>
+                <li>Insurance documents (private/EHIC etc.)</li>
+              </ul>
+            </div>
+          </div>
+
+          <!-- Student work -->
+          <div class="step">
+            <div class="stepHead">
+              <div class="stepLeft">
+                <input class="check" type="checkbox" id="s8"/>
+                <div>
+                  <p class="stepName">Step 8: Register in Študentski servis (Student Work Service)</p>
+                  <p class="stepSub"><b>Location:</b> <span id="locWORKLabel"></span></p>
+                </div>
+              </div>
+              <a class="mapBtn" id="btnWORK" target="_blank" rel="noopener">💼 Open in Maps</a>
+            </div>
+
+            <div class="docs">
+              <b>Documents Needed</b>
+              <ul>
+                <li>Passport (original)</li>
+                <li>Enrollment certificate / student status proof</li>
+                <li>Tax number</li>
+                <li>Bank account (sometimes required)</li>
+              </ul>
+            </div>
+          </div>
+
+        </div>
       </section>
 
-      <!-- RIGHT -->
+      <!-- RIGHT: SETTINGS -->
       <aside class="card">
-        <h2>📍 Personalize Your Routes (Any Student Can Use)</h2>
-        <p class="muted">Enter your starting address and update the map routes instantly.</p>
+        <h2>⚙️ Edit Your Places (For Any Student)</h2>
+        <p class="muted">Change your starting address and locations. All map buttons update automatically.</p>
 
-        <div class="settings">
+        <div class="field">
+          <label>Starting Address</label>
+          <input id="start" placeholder="Example: Mladinska ulica 7, 2000 Maribor"/>
+        </div>
+
+        <div class="two">
           <div class="field">
-            <label>Starting Address (your home / dorm / hostel)</label>
-            <input id="startAddress" placeholder="Example: Mladinska ulica 7, 2000 Maribor" />
-          </div>
-
-          <div class="two">
-            <div class="field">
-              <label>City Preset</label>
-              <select id="cityPreset">
-                <option value="maribor">Maribor (Preset)</option>
-                <option value="custom">Custom (Edit manually)</option>
-              </select>
-            </div>
-
-            <div class="field">
-              <label>Travel Mode</label>
-              <select id="travelMode">
-                <option value="walking">Walking</option>
-                <option value="transit">Public Transport</option>
-                <option value="driving">Driving</option>
-              </select>
-            </div>
+            <label>Travel Mode</label>
+            <select id="mode">
+              <option value="walking">Walking</option>
+              <option value="transit">Public Transport</option>
+              <option value="driving">Driving</option>
+            </select>
           </div>
 
           <div class="field">
-            <label>Upravna Enota (Foreigners Office)</label>
-            <input id="placeUE" />
-          </div>
-
-          <div class="field">
-            <label>University International Office</label>
-            <input id="placeUNI" />
-          </div>
-
-          <div class="field">
-            <label>FURS (Tax Office)</label>
-            <input id="placeFURS" />
-          </div>
-
-          <div class="field">
-            <label>ZZZS (Health Insurance Office)</label>
-            <input id="placeZZZS" />
-          </div>
-
-          <div class="field">
-            <label>Študentski servis (Student Work Service)</label>
-            <input id="placeWORK" />
-          </div>
-
-          <div class="field">
-            <label>Bus Card / Public Transport Card Location (Optional)</label>
-            <input id="placeBUS" placeholder="Example: Marprom ticket office Maribor" />
-          </div>
-
-          <div class="actions" style="margin-top:6px;">
-            <button class="btn primary" onclick="updateRoutes()">✅ Update Routes</button>
-            <button class="btn" onclick="fillMariborPreset()">⭐ Use Maribor Preset</button>
+            <label>Preset</label>
+            <select id="preset">
+              <option value="maribor">Maribor</option>
+              <option value="custom">Custom</option>
+            </select>
           </div>
         </div>
 
-        <h2 style="margin-top:14px;">🚶 Google Maps Routes</h2>
-        <div class="routes" id="routes"></div>
+        <div class="field">
+          <label>Upravna Enota (Foreigners Office)</label>
+          <input id="ue"/>
+        </div>
 
-        <div class="note">
-          🔒 Checklist progress saves on your device automatically.<br/>
-          ✅ Use “Copy Share Link” to send your route settings to friends.
+        <div class="field">
+          <label>University International Office</label>
+          <input id="uni"/>
+        </div>
+
+        <div class="field">
+          <label>FURS (Tax Office)</label>
+          <input id="furs"/>
+        </div>
+
+        <div class="field">
+          <label>ZZZS (Health Insurance Office)</label>
+          <input id="zzzs"/>
+        </div>
+
+        <div class="field">
+          <label>Študentski servis (Student Work Service)</label>
+          <input id="work"/>
+        </div>
+
+        <div class="field">
+          <label>Bus Card Location (Optional)</label>
+          <input id="bus" placeholder="Example: Marprom ticket office Maribor"/>
+        </div>
+
+        <div class="actions" style="margin-top:10px;">
+          <button class="btn primary" onclick="apply()">✅ Update</button>
+          <button class="btn" onclick="fillMaribor()">⭐ Maribor Preset</button>
+        </div>
+
+        <div class="routesBox">
+          <div class="routeCard">
+            <b>Tip</b>
+            <small>Use “Copy Share Link” to share your customized locations with friends.</small>
+          </div>
         </div>
       </aside>
 
     </div>
 
     <footer>
-      Built for international students in Slovenia 🇸🇮 | Created by <b>Justin Johnson</b>
+      Built for students in Maribor 🇸🇮 | Created by <b>Justin Johnson</b>
     </footer>
-
   </div>
 
   <script>
-    function q(id){ return document.getElementById(id); }
+    const $ = (id) => document.getElementById(id);
 
-    function mapsUrl(origin, destination, mode){
+    function maps(origin, destination, mode){
       const o = encodeURIComponent(origin.trim());
       const d = encodeURIComponent(destination.trim());
       return `https://www.google.com/maps/dir/?api=1&origin=${o}&destination=${d}&travelmode=${mode}`;
     }
 
-    function save(key, value){ localStorage.setItem("slv_"+key, value); }
-    function load(key, fallback=""){
-      const v = localStorage.getItem("slv_"+key);
-      return v === null ? fallback : v;
+    function searchNearby(query, near){
+      const q = encodeURIComponent(query);
+      const n = encodeURIComponent(near);
+      return `https://www.google.com/maps/search/${q}+near+${n}`;
     }
 
-    const checklistIds = ["d1","d2","d3","d4","d5","d6","t1","t2","t3","t4","t5","t6","t7","t8","t9"];
+    const checks = ["s1","s2","s3","s4","s5","s6","s7","s8"];
 
+    function saveChecks(){
+      checks.forEach(id=>{
+        const el = $(id);
+        el.addEventListener("change", ()=>{
+          localStorage.setItem("jj_"+id, el.checked ? "1" : "0");
+        });
+      });
+    }
     function loadChecks(){
-      checklistIds.forEach(id=>{
-        const saved = localStorage.getItem("slv_check_"+id);
-        if(saved !== null){
-          q(id).checked = (saved === "true");
-        }
-        q(id).addEventListener("change", (e)=>{
-          localStorage.setItem("slv_check_"+id, e.target.checked);
-        });
+      checks.forEach(id=>{
+        const v = localStorage.getItem("jj_"+id);
+        if(v !== null) $(id).checked = (v === "1");
       });
     }
 
-    function fillMariborPreset(){
-      q("startAddress").value = q("startAddress").value || "Mladinska ulica 7, 2000 Maribor";
-
-      q("placeUE").value = "Upravna Enota Maribor, Ulica heroja Staneta 1, 2000 Maribor";
-      q("placeUNI").value = "University of Maribor, Slomškov trg 15, 2000 Maribor";
-      q("placeFURS").value = "Finančna uprava RS (FURS), Titova cesta 10, 2000 Maribor";
-      q("placeZZZS").value = "ZZZS Maribor, Ulica Talcev 9, 2000 Maribor";
-      q("placeWORK").value = "Študentski servis Maribor, Gosposvetska cesta 83, 2000 Maribor";
-
-      // leave bus place empty by default (user can add)
-      q("placeBUS").value = q("placeBUS").value || "";
-
-      q("cityPreset").value = "maribor";
-      updateRoutes();
+    function fillMaribor(){
+      $("preset").value = "maribor";
+      $("start").value = $("start").value || "Mladinska ulica 7, 2000 Maribor";
+      $("ue").value = "Upravna Enota Maribor, Ulica heroja Staneta 1, 2000 Maribor";
+      $("uni").value = "University of Maribor, Slomškov trg 15, 2000 Maribor";
+      $("furs").value = "Finančna uprava RS (FURS), Titova cesta 10, 2000 Maribor";
+      $("zzzs").value = "ZZZS Maribor, Ulica Talcev 9, 2000 Maribor";
+      $("work").value = "Študentski servis Maribor, Gosposvetska cesta 83, 2000 Maribor";
+      $("bus").value = $("bus").value || "";
+      apply();
     }
 
-    function updateRoutes(){
-      const start = q("startAddress").value.trim() || "Mladinska ulica 7, 2000 Maribor";
-      const mode = q("travelMode").value;
+    function apply(){
+      const start = $("start").value.trim() || "Mladinska ulica 7, 2000 Maribor";
+      const mode = $("mode").value;
 
-      const UE = q("placeUE").value.trim();
-      const UNI = q("placeUNI").value.trim();
-      const FURS = q("placeFURS").value.trim();
-      const ZZZS = q("placeZZZS").value.trim();
-      const WORK = q("placeWORK").value.trim();
-      const BUS = q("placeBUS").value.trim();
+      const ue = $("ue").value.trim();
+      const uni = $("uni").value.trim();
+      const furs = $("furs").value.trim();
+      const zzzs = $("zzzs").value.trim();
+      const work = $("work").value.trim();
+      const bus = $("bus").value.trim();
 
-      save("start", start);
-      save("mode", mode);
-      save("UE", UE);
-      save("UNI", UNI);
-      save("FURS", FURS);
-      save("ZZZS", ZZZS);
-      save("WORK", WORK);
-      save("BUS", BUS);
+      // labels
+      $("locUELabel").textContent = ue || "Not set";
+      $("locUELabel2").textContent = ue || "Not set";
+      $("locUNILabel").textContent = uni || "Not set";
+      $("locFURSLabel").textContent = furs || "Not set";
+      $("locZZZSLabel").textContent = zzzs || "Not set";
+      $("locWORKLabel").textContent = work || "Not set";
+      $("locBUSLabel").textContent = bus ? bus : "Add your bus card office (optional)";
 
-      const routes = [
-        {title:"Route 1: Home → Upravna Enota", sub:"Address registration + permit office", url: mapsUrl(start, UE, mode)},
-        {title:"Route 2: Upravna Enota → University", sub:"Enrollment certificate / student confirmation", url: mapsUrl(UE, UNI, mode)},
-        {title:"Route 3: Home → FURS (Tax Office)", sub:"Tax number (Davčna številka)", url: mapsUrl(start, FURS, mode)},
-        {title:"Route 4: FURS → ZZZS (Insurance)", sub:"Health insurance support", url: mapsUrl(FURS, ZZZS, mode)},
-        {title:"Route 5: ZZZS → Student Work Service", sub:"Študentski servis registration", url: mapsUrl(ZZZS, WORK, mode)}
-      ];
+      // buttons
+      $("btnUE").href = ue ? maps(start, ue, mode) : "#";
+      $("btnPermit").href = ue ? maps(start, ue, mode) : "#";
+      $("btnUNI").href = uni ? maps(start, uni, mode) : "#";
+      $("btnFURS").href = furs ? maps(start, furs, mode) : "#";
+      $("btnZZZS").href = zzzs ? maps(start, zzzs, mode) : "#";
+      $("btnWORK").href = work ? maps(start, work, mode) : "#";
 
-      if (BUS){
-        routes.push({
-          title:"Route 6: Home → Bus Card Location",
-          sub:"Buy/recharge public transport card (optional)",
-          url: mapsUrl(start, BUS, mode)
-        });
-      }
+      $("btnBUS").href = bus ? maps(start, bus, mode) : searchNearby("bus card office", start);
+      $("btnTrain").href = searchNearby("train station", start);
 
-      const box = q("routes");
-      box.innerHTML = "";
-
-      routes.forEach(r=>{
-        const a = document.createElement("a");
-        a.className = "routeBtn";
-        a.href = r.url;
-        a.target = "_blank";
-        a.rel = "noopener noreferrer";
-        a.innerHTML = `
-          <div>
-            <b>${r.title}</b>
-            <small>${r.sub}</small>
-          </div>
-          <div style="opacity:.9">↗</div>
-        `;
-        box.appendChild(a);
-      });
-
-      updateShareUrl();
-    }
-
-    function updateShareUrl(){
+      // save settings
       const params = new URLSearchParams();
-      params.set("start", q("startAddress").value.trim());
-      params.set("mode", q("travelMode").value);
+      params.set("start", start);
+      params.set("mode", mode);
+      params.set("ue", ue);
+      params.set("uni", uni);
+      params.set("furs", furs);
+      params.set("zzzs", zzzs);
+      params.set("work", work);
+      params.set("bus", bus);
 
-      params.set("UE", q("placeUE").value.trim());
-      params.set("UNI", q("placeUNI").value.trim());
-      params.set("FURS", q("placeFURS").value.trim());
-      params.set("ZZZS", q("placeZZZS").value.trim());
-      params.set("WORK", q("placeWORK").value.trim());
-      params.set("BUS", q("placeBUS").value.trim());
+      history.replaceState({}, "", `${location.pathname}?${params.toString()}`);
 
-      const newUrl = `${location.origin}${location.pathname}?${params.toString()}`;
-      history.replaceState({}, "", newUrl);
+      localStorage.setItem("jj_start", start);
+      localStorage.setItem("jj_mode", mode);
+      localStorage.setItem("jj_ue", ue);
+      localStorage.setItem("jj_uni", uni);
+      localStorage.setItem("jj_furs", furs);
+      localStorage.setItem("jj_zzzs", zzzs);
+      localStorage.setItem("jj_work", work);
+      localStorage.setItem("jj_bus", bus);
     }
 
     function copyShareLink(){
-      updateShareUrl();
       navigator.clipboard.writeText(location.href)
-        .then(()=> alert("✅ Share link copied!"))
-        .catch(()=> alert("❌ Could not copy. Please copy from address bar."));
+        .then(()=> alert("✅ Link copied!"))
+        .catch(()=> alert("❌ Copy failed. Please copy from address bar."));
     }
 
     function resetAll(){
-      if(!confirm("Reset checklist and all saved settings?")) return;
-
-      checklistIds.forEach(id=>{
-        localStorage.removeItem("slv_check_"+id);
-        q(id).checked = false;
+      if(!confirm("Reset everything?")) return;
+      [...checks].forEach(id=>{
+        localStorage.removeItem("jj_"+id);
+        $(id).checked = false;
       });
-
-      ["start","mode","UE","UNI","FURS","ZZZS","WORK","BUS"].forEach(k=>{
-        localStorage.removeItem("slv_"+k);
-      });
-
-      q("startAddress").value = "";
-      q("travelMode").value = "walking";
-      q("placeBUS").value = "";
-      fillMariborPreset();
+      ["jj_start","jj_mode","jj_ue","jj_uni","jj_furs","jj_zzzs","jj_work","jj_bus"].forEach(k=>localStorage.removeItem(k));
+      fillMaribor();
       alert("✅ Reset done!");
     }
 
-    function initFromUrlOrStorage(){
-      const params = new URLSearchParams(location.search);
-
-      const start = params.get("start") || load("start", "Mladinska ulica 7, 2000 Maribor");
-      const mode = params.get("mode") || load("mode", "walking");
-
-      q("startAddress").value = start;
-      q("travelMode").value = mode;
-
-      q("placeUE").value = params.get("UE") || load("UE", "Upravna Enota Maribor, Ulica heroja Staneta 1, 2000 Maribor");
-      q("placeUNI").value = params.get("UNI") || load("UNI", "University of Maribor, Slomškov trg 15, 2000 Maribor");
-      q("placeFURS").value = params.get("FURS") || load("FURS", "Finančna uprava RS (FURS), Titova cesta 10, 2000 Maribor");
-      q("placeZZZS").value = params.get("ZZZS") || load("ZZZS", "ZZZS Maribor, Ulica Talcev 9, 2000 Maribor");
-      q("placeWORK").value = params.get("WORK") || load("WORK", "Študentski servis Maribor, Gosposvetska cesta 83, 2000 Maribor");
-      q("placeBUS").value = params.get("BUS") || load("BUS", "");
-
-      updateRoutes();
-    }
-
-    q("travelMode").addEventListener("change", updateRoutes);
-    q("cityPreset").addEventListener("change", ()=>{
-      if(q("cityPreset").value === "maribor") fillMariborPreset();
-    });
-
+    // init
+    saveChecks();
     loadChecks();
-    initFromUrlOrStorage();
+
+    // load settings from URL or storage
+    const url = new URLSearchParams(location.search);
+    $("start").value = url.get("start") || localStorage.getItem("jj_start") || "Mladinska ulica 7, 2000 Maribor";
+    $("mode").value = url.get("mode") || localStorage.getItem("jj_mode") || "walking";
+    $("ue").value = url.get("ue") || localStorage.getItem("jj_ue") || "Upravna Enota Maribor, Ulica heroja Staneta 1, 2000 Maribor";
+    $("uni").value = url.get("uni") || localStorage.getItem("jj_uni") || "University of Maribor, Slomškov trg 15, 2000 Maribor";
+    $("furs").value = url.get("furs") || localStorage.getItem("jj_furs") || "Finančna uprava RS (FURS), Titova cesta 10, 2000 Maribor";
+    $("zzzs").value = url.get("zzzs") || localStorage.getItem("jj_zzzs") || "ZZZS Maribor, Ulica Talcev 9, 2000 Maribor";
+    $("work").value = url.get("work") || localStorage.getItem("jj_work") || "Študentski servis Maribor, Gosposvetska cesta 83, 2000 Maribor";
+    $("bus").value = url.get("bus") || localStorage.getItem("jj_bus") || "";
+
+    apply();
   </script>
 </body>
 </html>
