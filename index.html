@@ -9,13 +9,13 @@
     :root{
       --bg:#0b1220;
       --panel:#101a2c;
-      --panel2:#0f1728;
       --text:#eaf2ff;
       --muted:#9fb0cf;
       --border:rgba(255,255,255,0.09);
       --accent:#4da3ff;
       --accent2:#22c55e;
       --danger:#ff5a6a;
+      --warn:#ffcc66;
     }
 
     *{ box-sizing:border-box; }
@@ -41,7 +41,6 @@
       align-items:flex-start;
       gap:14px;
       flex-wrap:wrap;
-
       padding:18px;
       background: rgba(16,26,44,0.80);
       border:1px solid var(--border);
@@ -59,7 +58,12 @@
       color: var(--muted);
       font-size: 13px;
       line-height:1.45;
-      max-width: 720px;
+      max-width: 840px;
+    }
+    .created{
+      margin-top: 6px;
+      color: var(--muted);
+      font-size: 12px;
     }
 
     .actions{
@@ -121,6 +125,75 @@
       line-height:1.5;
     }
 
+    .day{
+      margin-top: 12px;
+      padding: 14px;
+      border-radius: 16px;
+      border:1px solid var(--border);
+      background: rgba(255,255,255,0.03);
+    }
+
+    .dayHead{
+      display:flex;
+      justify-content:space-between;
+      align-items:flex-start;
+      gap:10px;
+      flex-wrap:wrap;
+      margin-bottom: 10px;
+    }
+    .dayHead b{
+      font-size: 14px;
+    }
+
+    .tag{
+      font-size: 12px;
+      padding: 6px 10px;
+      border-radius: 999px;
+      border:1px solid var(--border);
+      background: rgba(255,255,255,0.04);
+      color: var(--muted);
+    }
+    .tag.good{ color: var(--accent2); border-color: rgba(34,197,94,0.35); }
+    .tag.warn{ color: var(--warn); border-color: rgba(255,204,102,0.35); }
+
+    .task{
+      display:flex;
+      gap:10px;
+      align-items:flex-start;
+      padding: 10px;
+      border-radius: 14px;
+      border:1px solid var(--border);
+      background: rgba(255,255,255,0.03);
+      margin-top: 10px;
+    }
+    .task input[type="checkbox"]{
+      width:18px;height:18px;
+      margin-top: 2px;
+      accent-color: var(--accent);
+    }
+    .task b{
+      font-size: 14px;
+      display:block;
+    }
+    .task span{
+      display:block;
+      color: var(--muted);
+      font-size: 12.5px;
+      line-height:1.35;
+      margin-top:2px;
+    }
+
+    .note{
+      margin-top: 10px;
+      padding: 10px 12px;
+      border-radius: 14px;
+      border:1px dashed rgba(255,255,255,0.18);
+      background: rgba(255,255,255,0.03);
+      color: var(--muted);
+      font-size: 12.5px;
+      line-height: 1.45;
+    }
+
     .settings{
       display:grid;
       gap:12px;
@@ -159,62 +232,6 @@
       .two{ grid-template-columns: 1fr; }
     }
 
-    .day{
-      margin-top: 12px;
-      padding: 14px;
-      border-radius: 16px;
-      border:1px solid var(--border);
-      background: rgba(255,255,255,0.03);
-    }
-    .dayHead{
-      display:flex;
-      justify-content:space-between;
-      align-items:flex-start;
-      gap:10px;
-      flex-wrap:wrap;
-      margin-bottom: 10px;
-    }
-    .dayHead b{
-      font-size: 14px;
-    }
-    .tag{
-      font-size: 12px;
-      padding: 6px 10px;
-      border-radius: 999px;
-      border:1px solid var(--border);
-      background: rgba(255,255,255,0.04);
-      color: var(--muted);
-    }
-    .tag.good{ color: var(--accent2); border-color: rgba(34,197,94,0.35); }
-    .tag.warn{ color: #ffcc66; border-color: rgba(255,204,102,0.35); }
-
-    .task{
-      display:flex;
-      gap:10px;
-      align-items:flex-start;
-      padding: 10px;
-      border-radius: 14px;
-      border:1px solid var(--border);
-      background: rgba(255,255,255,0.03);
-      margin-top: 10px;
-    }
-    .task input[type="checkbox"]{
-      width:18px;height:18px;
-      margin-top: 2px;
-      accent-color: var(--accent);
-    }
-    .task b{
-      font-size: 14px;
-      display:block;
-    }
-    .task span{
-      display:block;
-      color: var(--muted);
-      font-size: 12.5px;
-      line-height:1.35;
-      margin-top:2px;
-    }
-
     .routes{
       display:grid;
       gap:10px;
@@ -246,17 +263,6 @@
       line-height: 1.2;
     }
 
-    .note{
-      margin-top: 10px;
-      padding: 10px 12px;
-      border-radius: 14px;
-      border:1px dashed rgba(255,255,255,0.18);
-      background: rgba(255,255,255,0.03);
-      color: var(--muted);
-      font-size: 12.5px;
-      line-height: 1.45;
-    }
-
     footer{
       margin-top: 14px;
       text-align:center;
@@ -274,9 +280,10 @@
       <div class="brand">
         <h1>🇸🇮 Slovenia Student Arrival Checklist</h1>
         <p>
-          A clean 3-day plan for international students (Maribor preset).  
-          You can edit your <b>starting address</b> and the map routes will update automatically.
+          A professional 3-day plan for international students (Maribor preset).  
+          Anyone can use this website: enter your starting address and open routes in Google Maps.
         </p>
+        <div class="created">Created by <b>Justin Johnson</b></div>
       </div>
 
       <div class="actions">
@@ -288,15 +295,26 @@
 
     <div class="grid">
 
-      <!-- LEFT: PLAN -->
+      <!-- LEFT -->
       <section class="card">
-        <h2>✅ 3-Day Plan (Easy & Realistic)</h2>
-        <p class="muted">
-          This checklist is designed to reduce stress and avoid back-and-forth visits.
-          (Routes update using your starting address.)
-        </p>
 
-        <!-- Day 1 -->
+        <h2>✅ Important Documents (Carry Originals + Copies)</h2>
+        <p class="muted">Keep these ready before visiting offices.</p>
+
+        <div class="task"><input type="checkbox" id="d1"><div><b>Passport (Original)</b><span>Must carry every time you go to official offices.</span></div></div>
+        <div class="task"><input type="checkbox" id="d2"><div><b>Visa + Entry Stamp</b><span>Take a copy of the visa page and entry stamp page.</span></div></div>
+        <div class="task"><input type="checkbox" id="d3"><div><b>Rent Agreement / Accommodation Proof</b><span>Needed for address registration and residence permit.</span></div></div>
+        <div class="task"><input type="checkbox" id="d4"><div><b>Enrollment Certificate (Potrdilo o vpisu)</b><span>You will get it from the university after enrollment.</span></div></div>
+        <div class="task"><input type="checkbox" id="d5"><div><b>Health Insurance Proof</b><span>Required for residence permit approval.</span></div></div>
+        <div class="task"><input type="checkbox" id="d6"><div><b>Proof of Funds</b><span>Bank statement / scholarship / sponsor proof (as required).</span></div></div>
+
+        <div class="note">
+          ✅ Tip: Make at least <b>2 photocopies</b> of each document and keep phone scans.
+        </div>
+
+        <h2 style="margin-top:14px;">✅ 3-Day Plan (Easy & Realistic)</h2>
+
+        <!-- DAY 1 -->
         <div class="day">
           <div class="dayHead">
             <div>
@@ -306,24 +324,13 @@
             <span class="tag warn">Most urgent</span>
           </div>
 
-          <div class="task">
-            <input type="checkbox" id="t1">
-            <div>
-              <b>Register Temporary Address</b>
-              <span>Go to: <b>Upravna Enota Maribor (Tujci)</b> — take passport + visa + rent agreement.</span>
-            </div>
-          </div>
-
-          <div class="task">
-            <input type="checkbox" id="t2">
-            <div>
-              <b>University Enrollment / Student Confirmation</b>
-              <span>Go to: <b>University of Maribor</b> — request enrollment certificate (Potrdilo o vpisu).</span>
-            </div>
-          </div>
+          <div class="task"><input type="checkbox" id="t1"><div><b>Register Temporary Address</b><span>Upravna Enota (Foreigners office). Bring passport + visa + rent agreement.</span></div></div>
+          <div class="task"><input type="checkbox" id="t2"><div><b>University Enrollment / Student Confirmation</b><span>University International Office. Request enrollment certificate.</span></div></div>
+          <div class="task"><input type="checkbox" id="t8"><div><b>Buy / Recharge Bus Card (Optional)</b><span>Useful for daily travel. Add your Bus Card location on the right to get routes.</span></div></div>
+          <div class="task"><input type="checkbox" id="t9"><div><b>Train Discount / Travel Option (Optional)</b><span>Check student discounts if you travel between cities.</span></div></div>
         </div>
 
-        <!-- Day 2 -->
+        <!-- DAY 2 -->
         <div class="day">
           <div class="dayHead">
             <div>
@@ -333,70 +340,31 @@
             <span class="tag good">Main step</span>
           </div>
 
-          <div class="task">
-            <input type="checkbox" id="t3">
-            <div>
-              <b>Submit Residence Permit + Biometrics</b>
-              <span>Return to Upravna Enota with: address paper + enrollment certificate + insurance + proof of funds.</span>
-            </div>
-          </div>
+          <div class="task"><input type="checkbox" id="t3"><div><b>Submit Residence Permit + Biometrics</b><span>Return to Upravna Enota with address paper + enrollment certificate + insurance + proof of funds.</span></div></div>
         </div>
 
-        <!-- Day 3 -->
+        <!-- DAY 3 -->
         <div class="day">
           <div class="dayHead">
             <div>
               <b>DAY 3 — Support Steps</b>
-              <div class="muted">Tax number + insurance + optional services</div>
+              <div class="muted">Tax number + insurance + work registration</div>
             </div>
-            <span class="tag">Optional extras</span>
+            <span class="tag">Support steps</span>
           </div>
 
-          <div class="task">
-            <input type="checkbox" id="t4">
-            <div>
-              <b>Apply for Tax Number (Davčna številka)</b>
-              <span>Go to: <b>FURS Maribor</b>. Needed for jobs + bank account.</span>
-            </div>
-          </div>
-
-          <div class="task">
-            <input type="checkbox" id="t5">
-            <div>
-              <b>Health Insurance (If pending)</b>
-              <span>Go to: <b>ZZZS Maribor</b> with passport + address registration.</span>
-            </div>
-          </div>
-
-          <div class="task">
-            <input type="checkbox" id="t6">
-            <div>
-              <b>Bank Account (Optional)</b>
-              <span>Choose any bank (NLB / OTP / SKB). Take passport + tax number.</span>
-            </div>
-          </div>
-
-          <div class="task">
-            <input type="checkbox" id="t7">
-            <div>
-              <b>Student Work Registration (Optional)</b>
-              <span>Register at student work service after tax number + student status.</span>
-            </div>
-          </div>
-
-          <div class="note">
-            ✅ Tip: If an office asks for “proof of address”, show your rent agreement + address registration paper.
-          </div>
+          <div class="task"><input type="checkbox" id="t4"><div><b>Apply for Tax Number (Davčna številka)</b><span>FURS office. Needed for jobs + salary + bank account.</span></div></div>
+          <div class="task"><input type="checkbox" id="t5"><div><b>Health Insurance (If pending)</b><span>ZZZS office. Take passport + address registration.</span></div></div>
+          <div class="task"><input type="checkbox" id="t6"><div><b>Open Bank Account (Optional)</b><span>Choose any bank. Take passport + tax number.</span></div></div>
+          <div class="task"><input type="checkbox" id="t7"><div><b>Register in Študentski servis (Student Work Service)</b><span>After you get tax number + student confirmation, register for student work.</span></div></div>
         </div>
 
       </section>
 
-      <!-- RIGHT: SETTINGS + ROUTES -->
+      <!-- RIGHT -->
       <aside class="card">
-        <h2>📍 Personalize Your Routes</h2>
-        <p class="muted">
-          Anyone can use this page. Just enter your starting address and open routes in Google Maps.
-        </p>
+        <h2>📍 Personalize Your Routes (Any Student Can Use)</h2>
+        <p class="muted">Enter your starting address and update the map routes instantly.</p>
 
         <div class="settings">
           <div class="field">
@@ -409,7 +377,7 @@
               <label>City Preset</label>
               <select id="cityPreset">
                 <option value="maribor">Maribor (Preset)</option>
-                <option value="custom">Custom (edit places manually)</option>
+                <option value="custom">Custom (Edit manually)</option>
               </select>
             </div>
 
@@ -424,12 +392,12 @@
           </div>
 
           <div class="field">
-            <label>Upravna Enota (Immigration / Foreigners office)</label>
+            <label>Upravna Enota (Foreigners Office)</label>
             <input id="placeUE" />
           </div>
 
           <div class="field">
-            <label>University (International Office)</label>
+            <label>University International Office</label>
             <input id="placeUNI" />
           </div>
 
@@ -444,8 +412,13 @@
           </div>
 
           <div class="field">
-            <label>Student Work Service (Optional)</label>
+            <label>Študentski servis (Student Work Service)</label>
             <input id="placeWORK" />
+          </div>
+
+          <div class="field">
+            <label>Bus Card / Public Transport Card Location (Optional)</label>
+            <input id="placeBUS" placeholder="Example: Marprom ticket office Maribor" />
           </div>
 
           <div class="actions" style="margin-top:6px;">
@@ -458,21 +431,20 @@
         <div class="routes" id="routes"></div>
 
         <div class="note">
-          🔒 Checklist progress is saved on your device (browser storage).  
-          Share link works best for the route settings.
+          🔒 Checklist progress saves on your device automatically.<br/>
+          ✅ Use “Copy Share Link” to send your route settings to friends.
         </div>
       </aside>
 
     </div>
 
     <footer>
-      Built for students ✨ | You can reuse this for any city by changing locations.
+      Built for international students in Slovenia 🇸🇮 | Created by <b>Justin Johnson</b>
     </footer>
 
   </div>
 
   <script>
-    // ---------- Helpers ----------
     function q(id){ return document.getElementById(id); }
 
     function mapsUrl(origin, destination, mode){
@@ -481,30 +453,26 @@
       return `https://www.google.com/maps/dir/?api=1&origin=${o}&destination=${d}&travelmode=${mode}`;
     }
 
-    function save(key, value){
-      localStorage.setItem("slv_"+key, value);
-    }
+    function save(key, value){ localStorage.setItem("slv_"+key, value); }
     function load(key, fallback=""){
       const v = localStorage.getItem("slv_"+key);
       return v === null ? fallback : v;
     }
 
-    // ---------- Checklist Save ----------
-    const taskIds = ["t1","t2","t3","t4","t5","t6","t7"];
+    const checklistIds = ["d1","d2","d3","d4","d5","d6","t1","t2","t3","t4","t5","t6","t7","t8","t9"];
 
-    function loadTasks(){
-      taskIds.forEach(id=>{
-        const saved = localStorage.getItem("slv_task_"+id);
+    function loadChecks(){
+      checklistIds.forEach(id=>{
+        const saved = localStorage.getItem("slv_check_"+id);
         if(saved !== null){
           q(id).checked = (saved === "true");
         }
         q(id).addEventListener("change", (e)=>{
-          localStorage.setItem("slv_task_"+id, e.target.checked);
+          localStorage.setItem("slv_check_"+id, e.target.checked);
         });
       });
     }
 
-    // ---------- Presets ----------
     function fillMariborPreset(){
       q("startAddress").value = q("startAddress").value || "Mladinska ulica 7, 2000 Maribor";
 
@@ -514,11 +482,13 @@
       q("placeZZZS").value = "ZZZS Maribor, Ulica Talcev 9, 2000 Maribor";
       q("placeWORK").value = "Študentski servis Maribor, Gosposvetska cesta 83, 2000 Maribor";
 
+      // leave bus place empty by default (user can add)
+      q("placeBUS").value = q("placeBUS").value || "";
+
       q("cityPreset").value = "maribor";
       updateRoutes();
     }
 
-    // ---------- Routes ----------
     function updateRoutes(){
       const start = q("startAddress").value.trim() || "Mladinska ulica 7, 2000 Maribor";
       const mode = q("travelMode").value;
@@ -528,8 +498,8 @@
       const FURS = q("placeFURS").value.trim();
       const ZZZS = q("placeZZZS").value.trim();
       const WORK = q("placeWORK").value.trim();
+      const BUS = q("placeBUS").value.trim();
 
-      // Save settings
       save("start", start);
       save("mode", mode);
       save("UE", UE);
@@ -537,15 +507,23 @@
       save("FURS", FURS);
       save("ZZZS", ZZZS);
       save("WORK", WORK);
+      save("BUS", BUS);
 
-      // Build routes UI
       const routes = [
-        {title:"Route 1: Home → Upravna Enota", sub:"Address registration + Permit office", url: mapsUrl(start, UE, mode)},
-        {title:"Route 2: Upravna Enota → University", sub:"Student enrollment documents", url: mapsUrl(UE, UNI, mode)},
+        {title:"Route 1: Home → Upravna Enota", sub:"Address registration + permit office", url: mapsUrl(start, UE, mode)},
+        {title:"Route 2: Upravna Enota → University", sub:"Enrollment certificate / student confirmation", url: mapsUrl(UE, UNI, mode)},
         {title:"Route 3: Home → FURS (Tax Office)", sub:"Tax number (Davčna številka)", url: mapsUrl(start, FURS, mode)},
         {title:"Route 4: FURS → ZZZS (Insurance)", sub:"Health insurance support", url: mapsUrl(FURS, ZZZS, mode)},
-        {title:"Route 5: ZZZS → Student Work Service (Optional)", sub:"Register for student work", url: mapsUrl(ZZZS, WORK, mode)}
+        {title:"Route 5: ZZZS → Student Work Service", sub:"Študentski servis registration", url: mapsUrl(ZZZS, WORK, mode)}
       ];
+
+      if (BUS){
+        routes.push({
+          title:"Route 6: Home → Bus Card Location",
+          sub:"Buy/recharge public transport card (optional)",
+          url: mapsUrl(start, BUS, mode)
+        });
+      }
 
       const box = q("routes");
       box.innerHTML = "";
@@ -566,11 +544,9 @@
         box.appendChild(a);
       });
 
-      // Update URL share
       updateShareUrl();
     }
 
-    // ---------- Share Link ----------
     function updateShareUrl(){
       const params = new URLSearchParams();
       params.set("start", q("startAddress").value.trim());
@@ -581,6 +557,7 @@
       params.set("FURS", q("placeFURS").value.trim());
       params.set("ZZZS", q("placeZZZS").value.trim());
       params.set("WORK", q("placeWORK").value.trim());
+      params.set("BUS", q("placeBUS").value.trim());
 
       const newUrl = `${location.origin}${location.pathname}?${params.toString()}`;
       history.replaceState({}, "", newUrl);
@@ -593,29 +570,25 @@
         .catch(()=> alert("❌ Could not copy. Please copy from address bar."));
     }
 
-    // ---------- Reset ----------
     function resetAll(){
       if(!confirm("Reset checklist and all saved settings?")) return;
 
-      // Reset tasks
-      taskIds.forEach(id=>{
-        localStorage.removeItem("slv_task_"+id);
+      checklistIds.forEach(id=>{
+        localStorage.removeItem("slv_check_"+id);
         q(id).checked = false;
       });
 
-      // Reset settings
-      ["start","mode","UE","UNI","FURS","ZZZS","WORK"].forEach(k=>{
+      ["start","mode","UE","UNI","FURS","ZZZS","WORK","BUS"].forEach(k=>{
         localStorage.removeItem("slv_"+k);
       });
 
-      // Reset inputs
       q("startAddress").value = "";
       q("travelMode").value = "walking";
+      q("placeBUS").value = "";
       fillMariborPreset();
       alert("✅ Reset done!");
     }
 
-    // ---------- Load From URL OR Storage ----------
     function initFromUrlOrStorage(){
       const params = new URLSearchParams(location.search);
 
@@ -630,18 +603,17 @@
       q("placeFURS").value = params.get("FURS") || load("FURS", "Finančna uprava RS (FURS), Titova cesta 10, 2000 Maribor");
       q("placeZZZS").value = params.get("ZZZS") || load("ZZZS", "ZZZS Maribor, Ulica Talcev 9, 2000 Maribor");
       q("placeWORK").value = params.get("WORK") || load("WORK", "Študentski servis Maribor, Gosposvetska cesta 83, 2000 Maribor");
+      q("placeBUS").value = params.get("BUS") || load("BUS", "");
 
       updateRoutes();
     }
 
-    // Events
     q("travelMode").addEventListener("change", updateRoutes);
     q("cityPreset").addEventListener("change", ()=>{
       if(q("cityPreset").value === "maribor") fillMariborPreset();
     });
 
-    // Init
-    loadTasks();
+    loadChecks();
     initFromUrlOrStorage();
   </script>
 </body>
