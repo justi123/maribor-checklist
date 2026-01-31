@@ -8,8 +8,6 @@
   <style>
     :root{
       --bg:#070b14;
-      --card:#0f172a;
-      --card2:#0b1324;
       --text:#eaf2ff;
       --muted:#9fb0cf;
       --border:rgba(255,255,255,0.10);
@@ -17,6 +15,24 @@
       --accent2:#22c55e;
       --warn:#ffcc66;
       --shadow: 0 16px 60px rgba(0,0,0,0.45);
+
+      --surface: rgba(15,23,42,0.86);
+      --surface2: rgba(255,255,255,0.03);
+      --surface3: rgba(11,19,36,0.55);
+      --btnbg: rgba(255,255,255,0.05);
+    }
+
+    body[data-theme="light"]{
+      --bg:#f7f9ff;
+      --text:#0a1020;
+      --muted:#465a80;
+      --border:rgba(10,16,32,0.14);
+      --shadow: 0 16px 45px rgba(0,0,0,0.10);
+
+      --surface: rgba(255,255,255,0.92);
+      --surface2: rgba(10,16,32,0.03);
+      --surface3: rgba(10,16,32,0.04);
+      --btnbg: rgba(10,16,32,0.04);
     }
 
     *{box-sizing:border-box}
@@ -29,81 +45,151 @@
         radial-gradient(900px 500px at 88% 10%, rgba(34,197,94,0.16), transparent 60%),
         var(--bg);
     }
+    body[data-theme="light"]{
+      background:
+        radial-gradient(900px 500px at 12% 0%, rgba(77,163,255,0.14), transparent 60%),
+        radial-gradient(900px 500px at 88% 10%, rgba(34,197,94,0.10), transparent 60%),
+        var(--bg);
+    }
 
-    .wrap{max-width:1200px; margin:0 auto; padding:26px 14px 60px;}
+    .wrap{max-width:1200px; margin:0 auto; padding:20px 12px 60px;}
     header{
       display:flex; justify-content:space-between; align-items:flex-start;
       gap:14px; flex-wrap:wrap;
-      padding:18px;
-      background:rgba(15,23,42,0.82);
+      padding:16px;
+      background:var(--surface);
       border:1px solid var(--border);
       border-radius:18px;
       box-shadow: var(--shadow);
       backdrop-filter: blur(10px);
     }
-    .brand h1{margin:0; font-size:20px;}
+    .brand h1{margin:0; font-size:18px;}
     .brand p{margin:6px 0 0; color:var(--muted); font-size:13px; line-height:1.45; max-width:820px;}
     .brand .by{margin-top:6px; color:var(--muted); font-size:12px;}
+
     .actions{display:flex; gap:10px; flex-wrap:wrap;}
     .btn{
       cursor:pointer;
       padding:10px 12px;
       border-radius:12px;
       border:1px solid var(--border);
-      background:rgba(255,255,255,0.05);
+      background:var(--btnbg);
       color:var(--text);
       font-size:13px;
       transition:.15s ease;
     }
-    .btn:hover{transform:translateY(-1px); background:rgba(77,163,255,0.12); border-color:rgba(77,163,255,0.25);}
+    .btn:hover{
+      transform:translateY(-1px);
+      background:rgba(77,163,255,0.12);
+      border-color:rgba(77,163,255,0.25);
+    }
     .btn.primary{background:rgba(77,163,255,0.16); border-color:rgba(77,163,255,0.35);}
 
-    .grid{display:grid; grid-template-columns: 1.25fr 0.75fr; gap:14px; margin-top:14px;}
-    @media(max-width: 980px){ .grid{grid-template-columns:1fr;} }
+    .grid{
+      display:grid;
+      grid-template-columns: 1.28fr 0.72fr;
+      gap:14px;
+      margin-top:14px;
+    }
+    @media(max-width: 980px){
+      .grid{grid-template-columns:1fr;}
+      .wrap{padding:16px 10px 50px;}
+      header{padding:14px;}
+      .brand h1{font-size:17px;}
+    }
 
     .card{
-      background:rgba(15,23,42,0.86);
+      background:var(--surface);
       border:1px solid var(--border);
       border-radius:18px;
-      padding:16px;
+      padding:15px;
       box-shadow: var(--shadow);
     }
     .card h2{margin:0 0 10px; font-size:15px;}
     .muted{color:var(--muted); font-size:13px; line-height:1.5;}
 
-    .field{display:grid; gap:6px; margin-top:10px;}
-    .field label{font-size:12.5px; color:var(--muted);}
-    .field input, .field select{
-      width:100%;
-      padding:11px 12px;
-      border-radius:12px;
+    /* Progress */
+    .progressBox{
+      margin-top:12px;
+      display:grid;
+      gap:10px;
+      padding:12px;
+      border-radius:16px;
       border:1px solid var(--border);
-      background:rgba(255,255,255,0.04);
-      color:var(--text);
-      outline:none;
-      font-size:14px;
+      background:var(--surface2);
     }
-    .field input:focus, .field select:focus{
-      border-color:rgba(77,163,255,0.45);
-      box-shadow:0 0 0 4px rgba(77,163,255,0.08);
+    .progressTop{
+      display:flex;
+      justify-content:space-between;
+      gap:10px;
+      flex-wrap:wrap;
+      align-items:center;
+    }
+    .progressTop b{font-size:13px;}
+    .meter{
+      width:100%;
+      height:10px;
+      border-radius:999px;
+      border:1px solid rgba(255,255,255,0.12);
+      background:rgba(255,255,255,0.06);
+      overflow:hidden;
+    }
+    body[data-theme="light"] .meter{
+      border-color: rgba(10,16,32,0.16);
+      background: rgba(10,16,32,0.06);
+    }
+    .meter > div{
+      height:100%;
+      width:0%;
+      background:rgba(77,163,255,0.75);
+      border-radius:999px;
+      transition: width .25s ease;
+    }
+    .miniMeters{display:grid; gap:8px;}
+    .miniRow{
+      display:flex; align-items:center; justify-content:space-between;
+      gap:10px; color:var(--muted); font-size:12px;
+    }
+    .miniBar{
+      flex:1; height:8px; border-radius:999px;
+      border:1px solid rgba(255,255,255,0.12);
+      background:rgba(255,255,255,0.06);
+      overflow:hidden;
+    }
+    body[data-theme="light"] .miniBar{
+      border-color: rgba(10,16,32,0.16);
+      background: rgba(10,16,32,0.06);
+    }
+    .miniBar > div{
+      height:100%;
+      width:0%;
+      background:rgba(34,197,94,0.7);
+      border-radius:999px;
+      transition: width .25s ease;
     }
 
-    .two{display:grid; grid-template-columns: 1fr 1fr; gap:12px;}
-    @media(max-width:520px){ .two{grid-template-columns:1fr;} }
-
-    .day{
+    /* Day collapsible */
+    details.day{
       margin-top:14px;
-      padding:14px;
+      padding:0;
       border:1px solid var(--border);
       border-radius:18px;
-      background:rgba(255,255,255,0.03);
+      background:var(--surface2);
+      overflow:hidden;
     }
-    .dayTop{
-      display:flex; justify-content:space-between; align-items:flex-start;
-      gap:10px; flex-wrap:wrap;
-      margin-bottom:10px;
+    summary.daySummary{
+      list-style:none;
+      cursor:pointer;
+      padding:14px;
+      display:flex;
+      justify-content:space-between;
+      align-items:flex-start;
+      gap:10px;
+      user-select:none;
     }
+    summary.daySummary::-webkit-details-marker{display:none;}
     .dayTitle{font-size:14px; font-weight:700;}
+    .daySub{margin-top:3px; color:var(--muted); font-size:12.7px; line-height:1.25;}
     .tag{
       font-size:12px;
       padding:6px 10px;
@@ -111,21 +197,26 @@
       border:1px solid var(--border);
       background:rgba(255,255,255,0.04);
       color:var(--muted);
+      white-space:nowrap;
     }
+    body[data-theme="light"] .tag{background: rgba(10,16,32,0.04);}
     .tag.warn{color:var(--warn); border-color:rgba(255,204,102,0.35);}
     .tag.good{color:var(--accent2); border-color:rgba(34,197,94,0.35);}
 
+    .dayBody{ padding: 0 14px 14px; }
+
+    /* Steps */
     .step{
       margin-top:10px;
       border-radius:16px;
       border:1px solid var(--border);
-      background:rgba(11,19,36,0.55);
+      background:var(--surface3);
       padding:12px;
     }
     .stepHead{
       display:flex;
       justify-content:space-between;
-      gap:10px;
+      gap:12px;
       flex-wrap:wrap;
       align-items:flex-start;
     }
@@ -134,36 +225,20 @@
       gap:10px;
       align-items:flex-start;
       min-width: 240px;
+      flex: 1;
     }
     .check{
       width:18px;height:18px;
       margin-top:3px;
       accent-color: var(--accent);
+      flex: 0 0 auto;
     }
-    .stepName{
-      font-weight:700;
-      font-size:14px;
-      margin:0;
-    }
+    .stepName{font-weight:700; font-size:14px; margin:0;}
     .stepSub{
       margin:3px 0 0;
       color:var(--muted);
       font-size:12.7px;
       line-height:1.35;
-    }
-
-    .chipRow{
-      display:flex; gap:8px; flex-wrap:wrap;
-      margin-top:10px;
-    }
-    .chip{
-      font-size:12px;
-      padding:7px 9px;
-      border-radius:999px;
-      border:1px solid var(--border);
-      background:rgba(255,255,255,0.04);
-      color:var(--muted);
-      user-select:none;
     }
 
     .docs{
@@ -173,9 +248,25 @@
       border:1px dashed rgba(255,255,255,0.18);
       background:rgba(255,255,255,0.03);
     }
+    body[data-theme="light"] .docs{
+      background: rgba(10,16,32,0.03);
+      border-color: rgba(10,16,32,0.18);
+    }
     .docs b{display:block; font-size:12.5px; margin-bottom:6px;}
     .docs ul{margin:0; padding-left:18px;}
     .docs li{margin:4px 0; color:var(--muted); font-size:12.5px; line-height:1.35;}
+
+    .chipRow{display:flex; gap:8px; flex-wrap:wrap; margin-top:10px;}
+    .chip{
+      font-size:12px;
+      padding:7px 9px;
+      border-radius:999px;
+      border:1px solid var(--border);
+      background:rgba(255,255,255,0.04);
+      color:var(--muted);
+      user-select:none;
+    }
+    body[data-theme="light"] .chip{ background: rgba(10,16,32,0.04); }
 
     .mapBtn{
       display:inline-flex;
@@ -193,16 +284,65 @@
       white-space:nowrap;
     }
     .mapBtn:hover{transform:translateY(-1px); background:rgba(77,163,255,0.18);}
+    .mapBtn.disabled{opacity:0.55; pointer-events:none;}
 
-    .routesBox{display:grid; gap:10px; margin-top:10px;}
-    .routeCard{
+    /* Right side collapsible */
+    details.panel{
       border:1px solid var(--border);
-      background:rgba(255,255,255,0.03);
-      border-radius:16px;
-      padding:12px;
+      border-radius:18px;
+      background:var(--surface2);
+      overflow:hidden;
+      margin-top:10px;
     }
-    .routeCard b{display:block; font-size:13px;}
-    .routeCard small{display:block; margin-top:4px; color:var(--muted); font-size:12px; line-height:1.25;}
+    summary.panelSummary{
+      list-style:none;
+      cursor:pointer;
+      padding:12px 14px;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:10px;
+      user-select:none;
+    }
+    summary.panelSummary::-webkit-details-marker{display:none;}
+    .panelTitle{font-weight:700; font-size:13.5px;}
+    .panelHint{color:var(--muted); font-size:12px; margin-top:2px;}
+    .panelBody{ padding:0 14px 14px; }
+
+    /* Right side inputs */
+    .field{display:grid; gap:6px; margin-top:10px;}
+    .field label{font-size:12.5px; color:var(--muted);}
+    .field input, .field select{
+      width:100%;
+      padding:11px 12px;
+      border-radius:12px;
+      border:1px solid var(--border);
+      background:rgba(255,255,255,0.04);
+      color:var(--text);
+      outline:none;
+      font-size:14px;
+    }
+    body[data-theme="light"] .field input, body[data-theme="light"] .field select{
+      background: rgba(10,16,32,0.04);
+    }
+    .field input:focus, .field select:focus{
+      border-color:rgba(77,163,255,0.45);
+      box-shadow:0 0 0 4px rgba(77,163,255,0.08);
+    }
+    .two{display:grid; grid-template-columns: 1fr 1fr; gap:12px;}
+    @media(max-width:520px){ .two{grid-template-columns:1fr;} }
+
+    .helpBox{
+      margin-top:12px;
+      padding:12px;
+      border-radius:16px;
+      border:1px solid var(--border);
+      background:var(--surface2);
+      color:var(--muted);
+      font-size:12.5px;
+      line-height:1.45;
+    }
+
     footer{margin-top:14px; text-align:center; color:var(--muted); font-size:12px;}
   </style>
 </head>
@@ -213,14 +353,17 @@
       <div class="brand">
         <h1>🇸🇮 Slovenia Student Arrival Checklist (3 Days)</h1>
         <p>
-          Day-wise steps with locations, required documents, and Google Maps buttons.
-          Works for Maribor preset — or any student can edit places and use it.
+          Clean day-wise steps with locations, required documents, and Google Maps buttons.
+          This is a universal checklist — just change your address and places.
         </p>
         <div class="by">Created by <b>Justin Johnson</b></div>
       </div>
 
       <div class="actions">
         <button class="btn primary" onclick="window.print()">🖨️ Print</button>
+        <button class="btn" id="themeBtn" onclick="toggleTheme()">🌙 Dark</button>
+        <button class="btn" onclick="expandAll()">⬇ Expand All</button>
+        <button class="btn" onclick="collapseAll()">⬆ Collapse All</button>
         <button class="btn" onclick="copyShareLink()">🔗 Copy Share Link</button>
         <button class="btn" onclick="resetAll()">♻️ Reset</button>
       </div>
@@ -228,323 +371,429 @@
 
     <div class="grid">
 
-      <!-- LEFT: DAY WISE -->
+      <!-- LEFT -->
       <section class="card">
-        <h2>✅ 3-Day Plan (Classy View)</h2>
-        <p class="muted">Each step includes the exact place, required documents, and a Google Maps route button.</p>
+        <h2>📊 Progress</h2>
+        <p class="muted">Your progress updates automatically when you tick steps.</p>
+
+        <div class="progressBox">
+          <div class="progressTop">
+            <b>Overall Completion</b>
+            <span class="muted" id="overallText">0%</span>
+          </div>
+          <div class="meter"><div id="overallBar"></div></div>
+
+          <div class="miniMeters">
+            <div class="miniRow">
+              <span>Day 1</span>
+              <div class="miniBar"><div id="d1Bar"></div></div>
+              <span id="d1Text">0%</span>
+            </div>
+            <div class="miniRow">
+              <span>Day 2</span>
+              <div class="miniBar"><div id="d2Bar"></div></div>
+              <span id="d2Text">0%</span>
+            </div>
+            <div class="miniRow">
+              <span>Day 3</span>
+              <div class="miniBar"><div id="d3Bar"></div></div>
+              <span id="d3Text">0%</span>
+            </div>
+          </div>
+        </div>
 
         <!-- DAY 1 -->
-        <div class="day">
-          <div class="dayTop">
+        <details class="day" id="day1" open>
+          <summary class="daySummary">
             <div>
               <div class="dayTitle">DAY 1 — Setup & Registration</div>
-              <div class="muted">Complete address registration + university confirmation</div>
+              <div class="daySub">Address registration + university confirmation + optional travel cards</div>
             </div>
             <span class="tag warn">Most urgent</span>
-          </div>
+          </summary>
 
-          <!-- Step 1 -->
-          <div class="step">
-            <div class="stepHead">
-              <div class="stepLeft">
-                <input class="check" type="checkbox" id="s1"/>
-                <div>
-                  <p class="stepName">Step 1: Register Temporary Address</p>
-                  <p class="stepSub"><b>Location:</b> <span id="locUELabel"></span></p>
+          <div class="dayBody">
+            <div class="step">
+              <div class="stepHead">
+                <div class="stepLeft">
+                  <input class="check" type="checkbox" id="s1"/>
+                  <div>
+                    <p class="stepName">Step 1: Register Temporary Address</p>
+                    <p class="stepSub"><b>Location:</b> <span id="locUELabel"></span></p>
+                  </div>
                 </div>
+                <a class="mapBtn" id="btnUE" target="_blank" rel="noopener">📍 Open in Maps</a>
               </div>
-              <a class="mapBtn" id="btnUE" target="_blank" rel="noopener">📍 Open in Maps</a>
+
+              <div class="docs">
+                <b>Documents Needed</b>
+                <ul>
+                  <li>Passport (original)</li>
+                  <li>Visa + entry stamp</li>
+                  <li>Rent agreement / accommodation proof</li>
+                </ul>
+              </div>
             </div>
 
-            <div class="docs">
-              <b>Documents Needed</b>
-              <ul>
-                <li>Passport (original)</li>
-                <li>Visa + entry stamp</li>
-                <li>Rent agreement / accommodation proof</li>
-              </ul>
-            </div>
-
-            <div class="chipRow">
-              <span class="chip">✅ Output: Address registration confirmation</span>
-              <span class="chip">⏱ Best time: morning</span>
-            </div>
-          </div>
-
-          <!-- Step 2 -->
-          <div class="step">
-            <div class="stepHead">
-              <div class="stepLeft">
-                <input class="check" type="checkbox" id="s2"/>
-                <div>
-                  <p class="stepName">Step 2: University Enrollment / Student Confirmation</p>
-                  <p class="stepSub"><b>Location:</b> <span id="locUNILabel"></span></p>
+            <div class="step">
+              <div class="stepHead">
+                <div class="stepLeft">
+                  <input class="check" type="checkbox" id="s2"/>
+                  <div>
+                    <p class="stepName">Step 2: University Enrollment / Student Confirmation</p>
+                    <p class="stepSub"><b>Location:</b> <span id="locUNILabel"></span></p>
+                  </div>
                 </div>
+                <a class="mapBtn" id="btnUNI" target="_blank" rel="noopener">🎓 Open in Maps</a>
               </div>
-              <a class="mapBtn" id="btnUNI" target="_blank" rel="noopener">🎓 Open in Maps</a>
+
+              <div class="docs">
+                <b>Documents Needed</b>
+                <ul>
+                  <li>Passport (original)</li>
+                  <li>Admission letter / offer letter</li>
+                </ul>
+              </div>
             </div>
 
-            <div class="docs">
-              <b>Documents Needed</b>
-              <ul>
-                <li>Passport (original)</li>
-                <li>Admission letter / offer letter</li>
-              </ul>
-            </div>
-
-            <div class="chipRow">
-              <span class="chip">✅ Output: Enrollment certificate (Potrdilo o vpisu)</span>
-            </div>
-          </div>
-
-          <!-- Step 3 -->
-          <div class="step">
-            <div class="stepHead">
-              <div class="stepLeft">
-                <input class="check" type="checkbox" id="s3"/>
-                <div>
-                  <p class="stepName">Step 3 (Optional): Buy / Recharge Bus Card</p>
-                  <p class="stepSub"><b>Location:</b> <span id="locBUSLabel"></span></p>
+            <div class="step">
+              <div class="stepHead">
+                <div class="stepLeft">
+                  <input class="check" type="checkbox" id="s3"/>
+                  <div>
+                    <p class="stepName">Step 3 (Optional): Buy / Recharge Bus Card</p>
+                    <p class="stepSub"><b>Location:</b> <span id="locBUSLabel"></span></p>
+                  </div>
                 </div>
+                <a class="mapBtn" id="btnBUS" target="_blank" rel="noopener">🚌 Open in Maps</a>
               </div>
-              <a class="mapBtn" id="btnBUS" target="_blank" rel="noopener">🚌 Open in Maps</a>
             </div>
 
-            <div class="docs">
-              <b>Documents Needed</b>
-              <ul>
-                <li>Passport / student ID (if asked)</li>
-                <li>Cash / card payment</li>
-              </ul>
-            </div>
-
-            <div class="chipRow">
-              <span class="chip">⭐ Optional but very useful</span>
-            </div>
-          </div>
-
-          <!-- Step 4 -->
-          <div class="step">
-            <div class="stepHead">
-              <div class="stepLeft">
-                <input class="check" type="checkbox" id="s4"/>
-                <div>
-                  <p class="stepName">Step 4 (Optional): Train Discount / Travel Info</p>
-                  <p class="stepSub"><b>Location:</b> Any train station / ticket office</p>
+            <div class="step">
+              <div class="stepHead">
+                <div class="stepLeft">
+                  <input class="check" type="checkbox" id="s4"/>
+                  <div>
+                    <p class="stepName">Step 4 (Optional): Train Discount / Travel Info</p>
+                    <p class="stepSub"><b>Location:</b> Nearby train station / ticket office</p>
+                  </div>
                 </div>
+                <a class="mapBtn" id="btnTrain" target="_blank" rel="noopener">🚆 Search Nearby</a>
               </div>
-              <a class="mapBtn" id="btnTrain" target="_blank" rel="noopener">🚆 Search Nearby</a>
-            </div>
-
-            <div class="docs">
-              <b>Documents Needed</b>
-              <ul>
-                <li>Passport (original)</li>
-                <li>Student confirmation / enrollment certificate (if needed)</li>
-              </ul>
             </div>
           </div>
-
-        </div>
+        </details>
 
         <!-- DAY 2 -->
-        <div class="day">
-          <div class="dayTop">
+        <details class="day" id="day2">
+          <summary class="daySummary">
             <div>
               <div class="dayTitle">DAY 2 — Residence Permit (Biometrics)</div>
-              <div class="muted">Submit residence permit + fingerprints/photo</div>
+              <div class="daySub">Submit residence permit + fingerprints/photo</div>
             </div>
             <span class="tag good">Main step</span>
-          </div>
+          </summary>
 
-          <div class="step">
-            <div class="stepHead">
-              <div class="stepLeft">
-                <input class="check" type="checkbox" id="s5"/>
-                <div>
-                  <p class="stepName">Step 5: Submit Residence Permit + Biometrics</p>
-                  <p class="stepSub"><b>Location:</b> <span id="locUELabel2"></span></p>
+          <div class="dayBody">
+            <div class="step">
+              <div class="stepHead">
+                <div class="stepLeft">
+                  <input class="check" type="checkbox" id="s5"/>
+                  <div>
+                    <p class="stepName">Step 5: Submit Residence Permit + Biometrics</p>
+                    <p class="stepSub"><b>Location:</b> <span id="locUELabel2"></span></p>
+                  </div>
                 </div>
+                <a class="mapBtn" id="btnPermit" target="_blank" rel="noopener">🪪 Open in Maps</a>
               </div>
-              <a class="mapBtn" id="btnPermit" target="_blank" rel="noopener">🪪 Open in Maps</a>
+            </div>
+          </div>
+        </details>
+
+        <!-- DAY 3 -->
+        <details class="day" id="day3">
+          <summary class="daySummary">
+            <div>
+              <div class="dayTitle">DAY 3 — Tax, Insurance & Student Services</div>
+              <div class="daySub">Support steps for work, bank, and daily life</div>
+            </div>
+            <span class="tag">Support</span>
+          </summary>
+
+          <div class="dayBody">
+            <div class="step">
+              <div class="stepHead">
+                <div class="stepLeft">
+                  <input class="check" type="checkbox" id="s6"/>
+                  <div>
+                    <p class="stepName">Step 6: Apply for Tax Number (Davčna številka)</p>
+                    <p class="stepSub"><b>Location:</b> <span id="locFURSLabel"></span></p>
+                  </div>
+                </div>
+                <a class="mapBtn" id="btnFURS" target="_blank" rel="noopener">🧾 Open in Maps</a>
+              </div>
             </div>
 
-            <div class="docs">
-              <b>Documents Needed</b>
-              <ul>
-                <li>Passport + Visa</li>
-                <li>Address registration confirmation (Day 1)</li>
-                <li>Enrollment certificate (Potrdilo o vpisu)</li>
-                <li>Health insurance proof</li>
-                <li>Proof of funds</li>
-              </ul>
+            <div class="step">
+              <div class="stepHead">
+                <div class="stepLeft">
+                  <input class="check" type="checkbox" id="s7"/>
+                  <div>
+                    <p class="stepName">Step 7: Health Insurance (If pending)</p>
+                    <p class="stepSub"><b>Location:</b> <span id="locZZZSLabel"></span></p>
+                  </div>
+                </div>
+                <a class="mapBtn" id="btnZZZS" target="_blank" rel="noopener">🏥 Open in Maps</a>
+              </div>
+            </div>
+
+            <div class="step">
+              <div class="stepHead">
+                <div class="stepLeft">
+                  <input class="check" type="checkbox" id="s8"/>
+                  <div>
+                    <p class="stepName">Step 8: Register in Študentski servis (Student Work Service)</p>
+                    <p class="stepSub"><b>Location:</b> <span id="locWORKLabel"></span></p>
+                  </div>
+                </div>
+                <a class="mapBtn" id="btnWORK" target="_blank" rel="noopener">💼 Open in Maps</a>
+              </div>
+            </div>
+          </div>
+        </details>
+      </section>
+
+      <!-- RIGHT -->
+      <aside class="card">
+        <h2>✅ Student Helper Panels</h2>
+        <p class="muted">All extra information is inside neat dropdowns.</p>
+
+        <!-- Locations Panel -->
+        <details class="panel" id="locationsPanel" open>
+          <summary class="panelSummary">
+            <div>
+              <div class="panelTitle">📍 Edit Places & Address</div>
+              <div class="panelHint">Click to expand/collapse</div>
+            </div>
+            <span class="tag">⚙️</span>
+          </summary>
+
+          <div class="panelBody">
+            <div class="field">
+              <label>Starting Address</label>
+              <input id="start" placeholder="Example: Mladinska ulica 7, 2000 Maribor"/>
+            </div>
+
+            <div class="two">
+              <div class="field">
+                <label>Travel Mode</label>
+                <select id="mode">
+                  <option value="walking">Walking</option>
+                  <option value="transit">Public Transport</option>
+                  <option value="driving">Driving</option>
+                </select>
+              </div>
+
+              <div class="field">
+                <label>Preset</label>
+                <select id="preset">
+                  <option value="maribor">Maribor</option>
+                  <option value="custom">Custom</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="field">
+              <label>Upravna Enota (Foreigners Office)</label>
+              <input id="ue"/>
+            </div>
+
+            <div class="field">
+              <label>University International Office</label>
+              <input id="uni"/>
+            </div>
+
+            <div class="field">
+              <label>FURS (Tax Office)</label>
+              <input id="furs"/>
+            </div>
+
+            <div class="field">
+              <label>ZZZS (Health Insurance Office)</label>
+              <input id="zzzs"/>
+            </div>
+
+            <div class="field">
+              <label>Študentski servis (Student Work Service)</label>
+              <input id="work"/>
+            </div>
+
+            <div class="field">
+              <label>Bus Card Location (Optional)</label>
+              <input id="bus" placeholder="Example: Marprom ticket office Maribor"/>
+            </div>
+
+            <div class="actions" style="margin-top:10px;">
+              <button class="btn primary" onclick="apply()">✅ Update</button>
+              <button class="btn" onclick="fillMaribor()">⭐ Maribor Preset</button>
+            </div>
+          </div>
+        </details>
+
+        <!-- Cheapest Shops -->
+        <details class="panel">
+          <summary class="panelSummary">
+            <div>
+              <div class="panelTitle">🛒 Cheapest Shops</div>
+              <div class="panelHint">Best for student savings</div>
+            </div>
+            <span class="tag">€</span>
+          </summary>
+          <div class="panelBody">
+            <div class="helpBox" style="margin-top:0;">
+              Best affordable stores: Hofer, Lidl, Eurospin (groceries), DM (toiletries), Pepco/KIK (cheap clothes).
             </div>
 
             <div class="chipRow">
-              <span class="chip">✅ Output: Confirmation paper (legal stay proof)</span>
-              <span class="chip">⏳ Card ready: 2–4 weeks (usually)</span>
+              <a class="mapBtn" target="_blank" rel="noopener"
+                 href="https://www.google.com/maps/search/Hofer+near+Maribor">Hofer</a>
+              <a class="mapBtn" target="_blank" rel="noopener"
+                 href="https://www.google.com/maps/search/Lidl+near+Maribor">Lidl</a>
+              <a class="mapBtn" target="_blank" rel="noopener"
+                 href="https://www.google.com/maps/search/Eurospin+near+Maribor">Eurospin</a>
+              <a class="mapBtn" target="_blank" rel="noopener"
+                 href="https://www.google.com/maps/search/dm+drogerie+markt+near+Maribor">DM</a>
+              <a class="mapBtn" target="_blank" rel="noopener"
+                 href="https://www.google.com/maps/search/Pepco+near+Maribor">Pepco</a>
+              <a class="mapBtn" target="_blank" rel="noopener"
+                 href="https://www.google.com/maps/search/KIK+near+Maribor">KIK</a>
             </div>
           </div>
-        </div>
+        </details>
 
-        <!-- DAY 3 -->
-        <div class="day">
-          <div class="dayTop">
+        <!-- Budget Plan -->
+        <details class="panel">
+          <summary class="panelSummary">
             <div>
-              <div class="dayTitle">DAY 3 — Tax, Insurance & Student Services</div>
-              <div class="muted">Finish support steps for work, bank, and daily life</div>
+              <div class="panelTitle">💶 Student Budget Plan (Monthly)</div>
+              <div class="panelHint">Smart money guide</div>
             </div>
-            <span class="tag">Support</span>
-          </div>
-
-          <!-- Tax -->
-          <div class="step">
-            <div class="stepHead">
-              <div class="stepLeft">
-                <input class="check" type="checkbox" id="s6"/>
-                <div>
-                  <p class="stepName">Step 6: Apply for Tax Number (Davčna številka)</p>
-                  <p class="stepSub"><b>Location:</b> <span id="locFURSLabel"></span></p>
-                </div>
-              </div>
-              <a class="mapBtn" id="btnFURS" target="_blank" rel="noopener">🧾 Open in Maps</a>
-            </div>
-
-            <div class="docs">
-              <b>Documents Needed</b>
-              <ul>
-                <li>Passport (original)</li>
-                <li>Address registration paper</li>
-              </ul>
+            <span class="tag">📌</span>
+          </summary>
+          <div class="panelBody">
+            <div class="helpBox" style="margin-top:0;">
+              <b>Typical monthly budget (student-friendly):</b><br/><br/>
+              • Rent: €250 – €450<br/>
+              • Food & groceries: €150 – €250<br/>
+              • Transport: €20 – €50<br/>
+              • Mobile / Internet: €10 – €20<br/>
+              • Personal (shopping / hygiene): €30 – €80<br/>
+              • Emergency / Extra: €30 – €100<br/><br/>
+              ✅ <b>Estimated Total:</b> €500 – €900 / month (depends on lifestyle)
             </div>
           </div>
+        </details>
 
-          <!-- Insurance -->
-          <div class="step">
-            <div class="stepHead">
-              <div class="stepLeft">
-                <input class="check" type="checkbox" id="s7"/>
-                <div>
-                  <p class="stepName">Step 7: Health Insurance (If pending)</p>
-                  <p class="stepSub"><b>Location:</b> <span id="locZZZSLabel"></span></p>
-                </div>
-              </div>
-              <a class="mapBtn" id="btnZZZS" target="_blank" rel="noopener">🏥 Open in Maps</a>
+        <!-- Emergency Numbers -->
+        <details class="panel">
+          <summary class="panelSummary">
+            <div>
+              <div class="panelTitle">🚨 Emergency Numbers (Slovenia)</div>
+              <div class="panelHint">Save these numbers</div>
             </div>
-
-            <div class="docs">
-              <b>Documents Needed</b>
-              <ul>
-                <li>Passport (original)</li>
-                <li>Address registration paper</li>
-                <li>Insurance documents (private/EHIC etc.)</li>
-              </ul>
+            <span class="tag">SOS</span>
+          </summary>
+          <div class="panelBody">
+            <div class="helpBox" style="margin-top:0;">
+              ✅ <b>112</b> – Ambulance / Fire / Emergency Help<br/>
+              ✅ <b>113</b> – Police<br/><br/>
+              Tip: If you don’t know Slovenian, speak slowly in English. Tell your location clearly.
             </div>
           </div>
+        </details>
 
-          <!-- Student work -->
-          <div class="step">
-            <div class="stepHead">
-              <div class="stepLeft">
-                <input class="check" type="checkbox" id="s8"/>
-                <div>
-                  <p class="stepName">Step 8: Register in Študentski servis (Student Work Service)</p>
-                  <p class="stepSub"><b>Location:</b> <span id="locWORKLabel"></span></p>
-                </div>
-              </div>
-              <a class="mapBtn" id="btnWORK" target="_blank" rel="noopener">💼 Open in Maps</a>
+        <!-- Nearby Hospital & Pharmacy -->
+        <details class="panel">
+          <summary class="panelSummary">
+            <div>
+              <div class="panelTitle">🏥 Nearby Hospital / Pharmacy</div>
+              <div class="panelHint">Search near your starting address</div>
             </div>
-
-            <div class="docs">
-              <b>Documents Needed</b>
-              <ul>
-                <li>Passport (original)</li>
-                <li>Enrollment certificate / student status proof</li>
-                <li>Tax number</li>
-                <li>Bank account (sometimes required)</li>
-              </ul>
+            <span class="tag">+</span>
+          </summary>
+          <div class="panelBody">
+            <div class="helpBox" style="margin-top:0;">
+              These buttons will search near your saved <b>Starting Address</b>.
+            </div>
+            <div class="chipRow">
+              <a class="mapBtn" id="btnHosp" target="_blank" rel="noopener">🏥 Hospitals</a>
+              <a class="mapBtn" id="btnPharm" target="_blank" rel="noopener">💊 Pharmacies</a>
             </div>
           </div>
+        </details>
 
-        </div>
-      </section>
-
-      <!-- RIGHT: SETTINGS -->
-      <aside class="card">
-        <h2>⚙️ Edit Your Places (For Any Student)</h2>
-        <p class="muted">Change your starting address and locations. All map buttons update automatically.</p>
-
-        <div class="field">
-          <label>Starting Address</label>
-          <input id="start" placeholder="Example: Mladinska ulica 7, 2000 Maribor"/>
-        </div>
-
-        <div class="two">
-          <div class="field">
-            <label>Travel Mode</label>
-            <select id="mode">
-              <option value="walking">Walking</option>
-              <option value="transit">Public Transport</option>
-              <option value="driving">Driving</option>
-            </select>
+        <!-- SIM Options -->
+        <details class="panel">
+          <summary class="panelSummary">
+            <div>
+              <div class="panelTitle">📶 Fastest SIM Card Options</div>
+              <div class="panelHint">Best networks for students</div>
+            </div>
+            <span class="tag">SIM</span>
+          </summary>
+          <div class="panelBody">
+            <div class="helpBox" style="margin-top:0;">
+              ✅ Popular SIM providers in Slovenia:<br/><br/>
+              • <b>A1</b> – strong coverage + fast internet<br/>
+              • <b>Telekom Slovenije</b> – reliable, wide coverage<br/>
+              • <b>Telemach</b> – good plans, popular among students<br/><br/>
+              Tip: Compare student offers + data plans before choosing.
+            </div>
+            <div class="chipRow">
+              <a class="mapBtn" target="_blank" rel="noopener"
+                 href="https://www.google.com/maps/search/A1+store+near+Maribor">A1 Store</a>
+              <a class="mapBtn" target="_blank" rel="noopener
+                 " href="https://www.google.com/maps/search/Telekom+store+near+Maribor">Telekom</a>
+              <a class="mapBtn" target="_blank" rel="noopener"
+                 href="https://www.google.com/maps/search/Telemach+store+near+Maribor">Telemach</a>
+            </div>
           </div>
+        </details>
 
-          <div class="field">
-            <label>Preset</label>
-            <select id="preset">
-              <option value="maribor">Maribor</option>
-              <option value="custom">Custom</option>
-            </select>
+        <!-- Tips -->
+        <details class="panel">
+          <summary class="panelSummary">
+            <div>
+              <div class="panelTitle">❄️ Tips (Winter • Safety • Rules)</div>
+              <div class="panelHint">Student survival guide</div>
+            </div>
+            <span class="tag">✅</span>
+          </summary>
+          <div class="panelBody">
+            <div class="helpBox" style="margin-top:0;">
+              <b>Winter Clothing:</b><br/>
+              • Buy a good jacket (windproof + waterproof)<br/>
+              • Gloves + thermal socks are a must<br/>
+              • Keep one umbrella always<br/><br/>
+
+              <b>Safety:</b><br/>
+              • Keep passport copies (phone + cloud)<br/>
+              • Use bank card, avoid carrying full cash<br/><br/>
+
+              <b>Local rules:</b><br/>
+              • Validate tickets if required<br/>
+              • Respect quiet hours in apartments<br/>
+              • Follow recycling rules (trash separation)
+            </div>
           </div>
-        </div>
+        </details>
 
-        <div class="field">
-          <label>Upravna Enota (Foreigners Office)</label>
-          <input id="ue"/>
-        </div>
-
-        <div class="field">
-          <label>University International Office</label>
-          <input id="uni"/>
-        </div>
-
-        <div class="field">
-          <label>FURS (Tax Office)</label>
-          <input id="furs"/>
-        </div>
-
-        <div class="field">
-          <label>ZZZS (Health Insurance Office)</label>
-          <input id="zzzs"/>
-        </div>
-
-        <div class="field">
-          <label>Študentski servis (Student Work Service)</label>
-          <input id="work"/>
-        </div>
-
-        <div class="field">
-          <label>Bus Card Location (Optional)</label>
-          <input id="bus" placeholder="Example: Marprom ticket office Maribor"/>
-        </div>
-
-        <div class="actions" style="margin-top:10px;">
-          <button class="btn primary" onclick="apply()">✅ Update</button>
-          <button class="btn" onclick="fillMaribor()">⭐ Maribor Preset</button>
-        </div>
-
-        <div class="routesBox">
-          <div class="routeCard">
-            <b>Tip</b>
-            <small>Use “Copy Share Link” to share your customized locations with friends.</small>
-          </div>
-        </div>
       </aside>
 
     </div>
 
     <footer>
-      Built for students in Maribor 🇸🇮 | Created by <b>Justin Johnson</b>
+      Built for students in Slovenia 🇸🇮 | Created by <b>Justin Johnson</b>
     </footer>
   </div>
 
@@ -556,28 +805,66 @@
       const d = encodeURIComponent(destination.trim());
       return `https://www.google.com/maps/dir/?api=1&origin=${o}&destination=${d}&travelmode=${mode}`;
     }
-
     function searchNearby(query, near){
       const q = encodeURIComponent(query);
       const n = encodeURIComponent(near);
       return `https://www.google.com/maps/search/${q}+near+${n}`;
     }
 
-    const checks = ["s1","s2","s3","s4","s5","s6","s7","s8"];
+    const stepIds = ["s1","s2","s3","s4","s5","s6","s7","s8"];
+    const day1Steps = ["s1","s2","s3","s4"];
+    const day2Steps = ["s5"];
+    const day3Steps = ["s6","s7","s8"];
 
-    function saveChecks(){
-      checks.forEach(id=>{
+    function percent(done, total){
+      return total === 0 ? 0 : Math.round((done/total) * 100);
+    }
+
+    function updateProgress(){
+      const total = stepIds.length;
+      const done = stepIds.filter(id => $(id).checked).length;
+
+      const d1done = day1Steps.filter(id => $(id).checked).length;
+      const d2done = day2Steps.filter(id => $(id).checked).length;
+      const d3done = day3Steps.filter(id => $(id).checked).length;
+
+      const overallP = percent(done, total);
+      const d1P = percent(d1done, day1Steps.length);
+      const d2P = percent(d2done, day2Steps.length);
+      const d3P = percent(d3done, day3Steps.length);
+
+      $("overallText").textContent = `${overallP}%`;
+      $("overallBar").style.width = `${overallP}%`;
+
+      $("d1Text").textContent = `${d1P}%`;
+      $("d2Text").textContent = `${d2P}%`;
+      $("d3Text").textContent = `${d3P}%`;
+
+      $("d1Bar").style.width = `${d1P}%`;
+      $("d2Bar").style.width = `${d2P}%`;
+      $("d3Bar").style.width = `${d3P}%`;
+    }
+
+    function bindChecks(){
+      stepIds.forEach(id=>{
         const el = $(id);
+        const saved = localStorage.getItem("jj_"+id);
+        if(saved !== null) el.checked = (saved === "1");
+
         el.addEventListener("change", ()=>{
           localStorage.setItem("jj_"+id, el.checked ? "1" : "0");
+          updateProgress();
         });
       });
     }
-    function loadChecks(){
-      checks.forEach(id=>{
-        const v = localStorage.getItem("jj_"+id);
-        if(v !== null) $(id).checked = (v === "1");
-      });
+
+    function setBtn(el, href){
+      el.href = href;
+      el.classList.remove("disabled");
+    }
+    function disableBtn(el){
+      el.href = "#";
+      el.classList.add("disabled");
     }
 
     function fillMaribor(){
@@ -603,7 +890,6 @@
       const work = $("work").value.trim();
       const bus = $("bus").value.trim();
 
-      // labels
       $("locUELabel").textContent = ue || "Not set";
       $("locUELabel2").textContent = ue || "Not set";
       $("locUNILabel").textContent = uni || "Not set";
@@ -612,29 +898,20 @@
       $("locWORKLabel").textContent = work || "Not set";
       $("locBUSLabel").textContent = bus ? bus : "Add your bus card office (optional)";
 
-      // buttons
-      $("btnUE").href = ue ? maps(start, ue, mode) : "#";
-      $("btnPermit").href = ue ? maps(start, ue, mode) : "#";
-      $("btnUNI").href = uni ? maps(start, uni, mode) : "#";
-      $("btnFURS").href = furs ? maps(start, furs, mode) : "#";
-      $("btnZZZS").href = zzzs ? maps(start, zzzs, mode) : "#";
-      $("btnWORK").href = work ? maps(start, work, mode) : "#";
+      if(ue){ setBtn($("btnUE"), maps(start, ue, mode)); setBtn($("btnPermit"), maps(start, ue, mode)); }
+      else { disableBtn($("btnUE")); disableBtn($("btnPermit")); }
 
-      $("btnBUS").href = bus ? maps(start, bus, mode) : searchNearby("bus card office", start);
-      $("btnTrain").href = searchNearby("train station", start);
+      if(uni){ setBtn($("btnUNI"), maps(start, uni, mode)); } else { disableBtn($("btnUNI")); }
+      if(furs){ setBtn($("btnFURS"), maps(start, furs, mode)); } else { disableBtn($("btnFURS")); }
+      if(zzzs){ setBtn($("btnZZZS"), maps(start, zzzs, mode)); } else { disableBtn($("btnZZZS")); }
+      if(work){ setBtn($("btnWORK"), maps(start, work, mode)); } else { disableBtn($("btnWORK")); }
 
-      // save settings
-      const params = new URLSearchParams();
-      params.set("start", start);
-      params.set("mode", mode);
-      params.set("ue", ue);
-      params.set("uni", uni);
-      params.set("furs", furs);
-      params.set("zzzs", zzzs);
-      params.set("work", work);
-      params.set("bus", bus);
+      setBtn($("btnBUS"), bus ? maps(start, bus, mode) : searchNearby("bus card office", start));
+      setBtn($("btnTrain"), searchNearby("train station", start));
 
-      history.replaceState({}, "", `${location.pathname}?${params.toString()}`);
+      // Nearby hospital & pharmacy buttons use starting address
+      setBtn($("btnHosp"), searchNearby("hospital", start));
+      setBtn($("btnPharm"), searchNearby("pharmacy", start));
 
       localStorage.setItem("jj_start", start);
       localStorage.setItem("jj_mode", mode);
@@ -644,6 +921,17 @@
       localStorage.setItem("jj_zzzs", zzzs);
       localStorage.setItem("jj_work", work);
       localStorage.setItem("jj_bus", bus);
+
+      const params = new URLSearchParams();
+      params.set("start", start);
+      params.set("mode", mode);
+      params.set("ue", ue);
+      params.set("uni", uni);
+      params.set("furs", furs);
+      params.set("zzzs", zzzs);
+      params.set("work", work);
+      params.set("bus", bus);
+      history.replaceState({}, "", `${location.pathname}?${params.toString()}`);
     }
 
     function copyShareLink(){
@@ -654,20 +942,40 @@
 
     function resetAll(){
       if(!confirm("Reset everything?")) return;
-      [...checks].forEach(id=>{
+
+      stepIds.forEach(id=>{
         localStorage.removeItem("jj_"+id);
         $(id).checked = false;
       });
-      ["jj_start","jj_mode","jj_ue","jj_uni","jj_furs","jj_zzzs","jj_work","jj_bus"].forEach(k=>localStorage.removeItem(k));
+
+      ["jj_start","jj_mode","jj_ue","jj_uni","jj_furs","jj_zzzs","jj_work","jj_bus"].forEach(k=>{
+        localStorage.removeItem(k);
+      });
+
       fillMaribor();
+      updateProgress();
       alert("✅ Reset done!");
     }
 
-    // init
-    saveChecks();
-    loadChecks();
+    function expandAll(){ ["day1","day2","day3"].forEach(id => $(id).open = true); }
+    function collapseAll(){ ["day1","day2","day3"].forEach(id => $(id).open = false); }
 
-    // load settings from URL or storage
+    function setTheme(theme){
+      document.body.setAttribute("data-theme", theme);
+      localStorage.setItem("jj_theme", theme);
+      const btn = $("themeBtn");
+      btn.textContent = theme === "light" ? "☀️ Light" : "🌙 Dark";
+    }
+    function toggleTheme(){
+      const current = document.body.getAttribute("data-theme") || "dark";
+      setTheme(current === "dark" ? "light" : "dark");
+    }
+
+    // Init
+    bindChecks();
+    const savedTheme = localStorage.getItem("jj_theme") || "dark";
+    setTheme(savedTheme);
+
     const url = new URLSearchParams(location.search);
     $("start").value = url.get("start") || localStorage.getItem("jj_start") || "Mladinska ulica 7, 2000 Maribor";
     $("mode").value = url.get("mode") || localStorage.getItem("jj_mode") || "walking";
@@ -679,6 +987,7 @@
     $("bus").value = url.get("bus") || localStorage.getItem("jj_bus") || "";
 
     apply();
+    updateProgress();
   </script>
 </body>
 </html>
